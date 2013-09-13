@@ -14,3 +14,7 @@ nb*
 
 src/test
 target
+
+# Project guff #
+
+test.yml
