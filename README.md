@@ -1,6 +1,21 @@
-# The UDS Ancestry GEDCOM editor
+# SuperGenes - 0.2.15 #
 
-## Why?
-There are a lot of programs out there, open and closed source, free and paid, fully capable of editing, viewing and manipulating GEDCOMs in various ways.
+SuperGenes is primarily a [GEDCOM](http://en.wikipedia.org/wiki/GEDCOM) editor
+written with full support of standard version 5.5 and further 5.x versions. The
+application can be run on the command line, supports a variety of different
+services and will eventually be expanded with an easy to use GUI.
 
-Most have different rules regarding family relations, facts and sources. What better way to get the functionality I require than by writing this?
+A superb feature of SuperGenes is its ability to generate a fully operational
+HTML/CSS based website very quickly. This website will support customizations
+once the GUI has been implemented.
+
+&copy; 2013 UndeadScythes of UndeadScythes' Empire
+
+Feel free to post issues and suggestions on GitHub at the address shown below.
+SuperGenes source code can be found on
+[GitHub](https://github.com/UndeadScythes/SuperGenes) and is released under the
+CC BY-NC-SA 2.0 UK license. A copy of this licence is located in the file named
+LICENCE.lic, if this file is not present the text can be found
+[here](http://creativecommons.org/licenses/by-nc-sa/2.0/uk/legalcode).
+
+Last edited on 2013-09-13.
