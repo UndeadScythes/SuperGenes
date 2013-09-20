@@ -1,73 +1,91 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+			     http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.undeadscythes</groupId>
   <artifactId>SuperGenes</artifactId>
-  <version>0.2.15</version>
+  <version>0.3.1</version>
   <packaging>jar</packaging>
-  <properties>
-    <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
-    <dev.build.timestamp>${maven.build.timestamp}</dev.build.timestamp>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>RELEASE</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.yaml</groupId>
-      <artifactId>snakeyaml</artifactId>
-      <version>RELEASE</version>
-      <scope>test</scope>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>RELEASE</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>org.reflections</groupId>
-      <artifactId>reflections</artifactId>
-      <version>RELEASE</version>
-    </dependency>
-    <dependency>
       <groupId>com.undeadscythes</groupId>
-      <artifactId>GEDFORM</artifactId>
-      <version>LATEST</version>
+      <artifactId>GeneBase</artifactId>
+      <version>0.0.2</version>
       <type>jar</type>
     </dependency>
     <dependency>
       <groupId>com.undeadscythes</groupId>
       <artifactId>AuthentiCmd</artifactId>
-      <version>LATEST</version>
+      <version>1.2.6</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.reflections</groupId>
+      <artifactId>reflections</artifactId>
+      <version>0.9.9-RC1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.1</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.4</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>1.13</version>
+      <scope>test</scope>
       <type>jar</type>
     </dependency>
   </dependencies>
+  <properties>
+    <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
+    <dev.build.timestamp>${maven.build.timestamp}</dev.build.timestamp>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
   <build>
-    <resources>
-      <resource>
-	<directory>src/main/resources</directory>
-	<filtering>true</filtering>
-      </resource>
-    </resources>
     <plugins>
       <plugin>
 	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-clean-plugin</artifactId>
-	<version>2.5</version>
+	<artifactId>maven-javadoc-plugin</artifactId>
+	<version>2.9.1</version>
 	<executions>
 	  <execution>
-	    <phase>initialize</phase>
+	    <phase>generate-sources</phase>
 	    <goals>
-	      <goal>clean</goal>
+	      <goal>javadoc</goal>
+	    </goals>
+            <configuration>
+              <quiet>true</quiet>
+            </configuration>
+	  </execution>
+	</executions>
+      </plugin>
+      <plugin>
+	<groupId>org.codehaus.mojo</groupId>
+	<artifactId>versions-maven-plugin</artifactId>
+	<version>2.1</version>
+	<executions>
+	  <execution>
+	    <phase>process-sources</phase>
+	    <goals>
+	      <goal>display-plugin-updates</goal>
+	      <goal>display-dependency-updates</goal>
 	    </goals>
 	  </execution>
 	</executions>
@@ -96,46 +114,14 @@
       </plugin>
       <plugin>
 	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-javadoc-plugin</artifactId>
-	<version>2.9.1</version>
-	<executions>
-	  <execution>
-	    <phase>generate-sources</phase>
-	    <goals>
-	      <goal>javadoc</goal>
-	    </goals>
-	  </execution>
-	</executions>
-      </plugin>
-      <plugin>
-	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-dependency-plugin</artifactId>
-	<version>2.8</version>
-	<executions>
-	  <execution>
-	    <phase>process-sources</phase>
-	    <goals>
-	      <goal>purge-local-repository</goal>
-	    </goals>
-	    <configuration>
-	      <excludes>
-		<exclude>com.undeadscythes:AuthentiCmd</exclude>
-		<exclude>com.undeadscythes:TipScript</exclude>
-		<exclude>com.undeadscythes:GEDFORM</exclude>
-		<exclude>com.undeadscythes:SuperGenes</exclude>
-	      </excludes>
-	    </configuration>
-	  </execution>
-	</executions>
-      </plugin>
-      <plugin>
-	<groupId>org.apache.maven.plugins</groupId>
 	<artifactId>maven-jar-plugin</artifactId>
 	<version>2.4</version>
 	<configuration>
 	  <archive>
 	    <manifest>
-	      <mainClass>com.undeadscythes.udsancestry.UDSAncestry</mainClass>
+	      <mainClass>com.undeadscythes.supergenes.Main</mainClass>
+	      <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+	      <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 	    </manifest>
 	  </archive>
 	</configuration>
@@ -159,18 +145,18 @@
       </plugin>
     </plugins>
   </build>
+
   <name>SuperGenes</name>
-  <description>
-SuperGenes is primarily a [GEDCOM](http://en.wikipedia.org/wiki/GEDCOM) editor
-written with full support of standard version 5.5 and further 5.x versions. The
+  <description>SuperGenes is primarily a [GEDCOM](http://en.wikipedia.org/wiki/GEDCOM) editor
+written with full support of standard version 5.5 and further 5.5.x versions. The
 application can be run on the command line, supports a variety of different
 services and will eventually be expanded with an easy to use GUI.
 
 A superb feature of SuperGenes is its ability to generate a fully operational
 HTML/CSS based website very quickly. This website will support customizations
-once the GUI has been implemented.
-  </description>
+once the GUI has been implemented.</description>
   <url>https://github.com/UndeadScythes/SuperGenes</url>
+  <inceptionYear>2012</inceptionYear>
   <licenses>
     <license>
       <name>Creative Commons BY-NC-SA 2.0 UK</name>
@@ -179,4 +165,24 @@ once the GUI has been implemented.
       <comments>Attribution - Non-Commercial - Share-Alike</comments>
     </license>
   </licenses>
+  <organization>
+    <name>UndeadScythes' Empire</name>
+    <url>http://undeadscythes.com</url>
+  </organization>
+  <developers>
+    <developer>
+      <id>UndeadScythes</id>
+      <name>Dave</name>
+      <email>daveyognaut2@gmail.com</email>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>0</timezone>
+    </developer>
+  </developers>
+
+  <prerequisites>
+    <maven>3.0</maven>
+  </prerequisites>
 </project>
