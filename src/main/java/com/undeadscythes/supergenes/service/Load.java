@@ -2,32 +2,29 @@ package com.undeadscythes.supergenes.service;
 
 import com.undeadscythes.authenticmd.*;
 import com.undeadscythes.authenticmd.service.*;
+import com.undeadscythes.gedform.exception.*;
+import com.undeadscythes.genebase.*;
+import com.undeadscythes.genebase.gedcom.*;
 import com.undeadscythes.supergenes.*;
-import com.undeadscythes.supergenes.gedcom.*;
 import com.undeadscythes.tipscript.*;
-import java.io.*;
 
 /**
  * @author UndeadScythes
  */
 public class Load implements Service {
-    public boolean run(AuthentiCmd cmdHandler, String[] args) {
-        SuperGenes program = (SuperGenes)cmdHandler;
-        TipScript out = program.getTipScript();
+    public boolean run(final AuthentiCmd cmdHandler, final String[] args) {
+        final SuperGenes program = (SuperGenes)cmdHandler;
+        final TipScript out = program.getTipScript();
         if (args.length < 1) {
             out.println("No file specified.");
             return true;
         }
         try {
-            File file = new File(args[0] + ".ged");
-            GEDCOM gedcom = new GEDCOM();
-            gedcom.load(file, out);
-            program.addGEDCOM(file.getName(), gedcom);
-            out.println("Loaded GEDCOM " + gedcom.getName() + " from " + args[0] + ".ged.");
-        } catch (FileNotFoundException ex) {
-            out.println("Cannot find this file.");
-        } catch (IOException ex) {
-            out.println("Cannot read this file.");
+            final GeneBase geneBase = new GeneBase(new GEDCOM(args[0] + ".ged"));
+            program.addGeneBase(geneBase.getUID().toString(), geneBase);
+            out.println("Loaded GEDCOM " + geneBase.getUID() + " from " + args[0] + ".ged.");
+        } catch (ParsingException ex) {
+            out.println("Cannot parse this file.");
         }
         return true;
     }

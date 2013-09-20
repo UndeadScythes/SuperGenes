@@ -1,64 +1,60 @@
 package com.undeadscythes.supergenes.service;
 
-import com.undeadscythes.gedform.*;
-import com.undeadscythes.supergenes.event.*;
+import com.undeadscythes.genebase.comparator.*;
+import com.undeadscythes.genebase.gedcom.*;
+import com.undeadscythes.genebase.record.*;
+import com.undeadscythes.genebase.structure.*;
+import com.undeadscythes.metaturtle.*;
 import com.undeadscythes.supergenes.exception.*;
-import com.undeadscythes.supergenes.gedcom.*;
-import com.undeadscythes.supergenes.holder.*;
-import com.undeadscythes.supergenes.individual.*;
-import static java.util.Collections.*;
 import java.util.*;
 
 /**
  * @author UndeadScythes
  */
 public class Timeline extends AncestryService {
-    public boolean run(String[] args) {
-        Individual i = getIndividual(args);
-        if (args.length == 0 && i.getID() == 0) {
-            if (!out.openFile(gedcom.getName() + ".tl")) {
+    public boolean run(final String[] args) {
+        final Individual indi = getIndividual(args);
+        if (args.length == 0 && indi.getUID().isNull()) {
+            if (!out.openFile(geneBase.getUID() + ".tl")) {
                 out.println("Cannot open file.");
                 return true;
             }
-            List<Event> events = new ArrayList<Event>(0);
-            for (Holder holder : gedcom.get(GEDCOMTag.INDIVIDUAL)) {
-                for (Holder event : holder.getList(TagType.EVENT)) {
-                    Event ev = (Event)event;
-                    ev.link =(Individual)holder;
-                    events.add(ev);
+            final List<Event> events = new ArrayList<Event>(0);
+            for (UniqueMeta holder : geneBase.getUniqueMeta(GEDTag.INDI)) {
+                for (Metadata hol : holder.getData(GEDTag.EVEN.getTag())) {
+                    final Event eve = (Event)hol;
+                    events.add(eve);
                 }
             }
-            sort(events, new SortByDate(true));
+            Collections.sort(events, SortByDate.INCREASING);
             for (Event event : events) {
                 String date = "0000-000-00 ";
                 try {
-                    date = event.getDate().getString();
+                    date = event.getDate().toString();
                 } catch (TagNotSetException ex) {}
-                String place = "";
-                try {
-                    place = event.getPlace();
-                } catch (TagNotSetException ex) {}
-                out.printf(date + " " + event.link.getFullName() + ": " + event.getTag().getFriendly() + (place.isEmpty() ? "" : " at " + place));
+                final Place place = event.getPlace();
+                out.printf(date + " " + event.getValue() + (place.isEmpty() ? "" : " at " + place));
             }
             out.closeFile();
-            out.println("Timeline saved to " + gedcom.getName() + ".tl.");
+            out.println("Timeline saved to " + geneBase.getUID() + ".tl.");
             return true;
         }
-        if (i.getID() == 0) {
+        if (indi.getUID().isNull()) {
             out.println("Cannot find individual.");
         }
-        out.println(i.getFullName() + "'s timeline:");
-        for (Holder holder : i.getList(TagType.EVENT, new SortByDate(true))) {
-            Event event = (Event)holder;
+        out.println(indi.getFullName() + "'s timeline:");
+
+        for (Metadata holder : indi.getData(GEDTag.EVEN, SortByDate.INCREASING)) {
+            final Event event = (Event)holder;
             String date = "0000-000-00 ";
             try {
-                date = event.getDate().getString();
+                date = event.getDate().toString();
             } catch (TagNotSetException ex) {}
             String place = "";
             try {
-                place = event.getPlace();
+                place = event.getPlace().toString();
             } catch (TagNotSetException ex) {}
-            out.println("- " + date + " " + event.getTag().getFriendly() + (place.isEmpty() ? "" : " at " + place));
+            out.println("- " + date + " " + event.getValue() + (place.isEmpty() ? "" : " at " + place));
         }
         return true;
     }

@@ -2,8 +2,8 @@ package com.undeadscythes.supergenes.service;
 
 import com.undeadscythes.authenticmd.*;
 import com.undeadscythes.authenticmd.service.*;
+import com.undeadscythes.genebase.*;
 import com.undeadscythes.supergenes.*;
-import com.undeadscythes.supergenes.gedcom.*;
 import com.undeadscythes.tipscript.*;
 
 /**
@@ -11,19 +11,19 @@ import com.undeadscythes.tipscript.*;
  */
 public class Auto implements Service {
     public boolean run(final AuthentiCmd cmdHandler, final String[] args) {
-        SuperGenes program = (SuperGenes)cmdHandler;
-        TipScript out = program.getTipScript();
+        final SuperGenes program = (SuperGenes)cmdHandler;
+        final TipScript out = program.getTipScript();
         if (args.length < 1) {
             out.println("No GEDCOM specified.");
             return true;
         }
-        GEDCOM gedcom = program.getGEDCOM(args[0]);
-        if (gedcom == null) {
+        final GeneBase genebase = program.getGeneBase(args[0]);
+        if (genebase == null) {
             out.println("Connot find requested GEDCOM.");
             return true;
         }
-        program.setAuto(gedcom);
-        out.println("Default GEDCOM set to " + gedcom.getName() + ".");
+        program.setAuto(genebase);
+        out.println("Default GEDCOM set to " + genebase.getUID() + ".");
         return true;
     }
 }

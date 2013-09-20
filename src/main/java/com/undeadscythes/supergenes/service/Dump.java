@@ -1,24 +1,25 @@
 package com.undeadscythes.supergenes.service;
 
-import com.undeadscythes.supergenes.individual.*;
+import com.undeadscythes.genebase.record.*;
 
 /**
  * @author UndeadScythes
  */
 public class Dump extends AncestryService {
     @Override
-    public boolean run(String[] args) {
-        Individual i = getIndividual(args);
-        if (i.getID() == 0) {
-            if (!out.openFile(gedcom.getName() + ".bug")) {
+    public boolean run(final String[] args) {
+        final Individual indi = getIndividual(args);
+        if (indi.getUID().isNull()) {
+            if (!out.openFile(geneBase.getUID() + ".bug")) {
                 out.println("Cannot open file.");
                 return true;
             }
-            gedcom.dump(out);
+            geneBase.dump(out);
             out.closeFile();
-            out.println("Output bug dump to " + gedcom.getName() + ".bug.");
+            out.println("Output bug dump to " + geneBase.getUID() + ".bug.");
+            return true;
         }
-        i.dump(out, "- ");
+        indi.dump(out, "- ");
         return true;
     }
 }

@@ -2,42 +2,34 @@ package com.undeadscythes.supergenes.service;
 
 import com.undeadscythes.authenticmd.*;
 import com.undeadscythes.authenticmd.service.*;
+import com.undeadscythes.genebase.*;
+import com.undeadscythes.genebase.gedcom.*;
+import com.undeadscythes.genebase.record.*;
+import com.undeadscythes.metaturtle.exception.*;
 import com.undeadscythes.supergenes.*;
-import com.undeadscythes.supergenes.gedcom.*;
-import com.undeadscythes.supergenes.individual.*;
 import com.undeadscythes.tipscript.*;
-import static java.lang.Integer.*;
 import static java.util.Arrays.*;
 
 /**
  * @author UndeadScythes
  */
 public abstract class AncestryService implements Service {
-    /**
-     *
-     */
-    protected GEDCOM gedcom;
-    /**
-     *
-     */
+    protected GeneBase geneBase;
     protected TipScript out;
-    /**
-     *
-     */
     protected SuperGenes program;
 
-    public boolean run(AuthentiCmd cmdHandler, String[] args) {
+    public boolean run(final AuthentiCmd cmdHandler, final String[] args) {
         program = (SuperGenes)cmdHandler;
-        gedcom = program.getAuto();
+        geneBase = program.getDefault();
         out = program.getTipScript();
         String[] newArgs = args;
-        if (gedcom == null) {
+        if (geneBase == null) {
             if (args.length < 1) {
                 out.println("No GEDCOM specified.");
                 return true;
             }
-            gedcom = program.getGEDCOM(args[0]);
-            if (gedcom == null) {
+            geneBase = program.getGeneBase(args[0]);
+            if (geneBase == null) {
                 out.println("Connot find requested GEDCOM.");
                 return true;
             }
@@ -49,27 +41,22 @@ public abstract class AncestryService implements Service {
     /**
      *
      * @param args
-     * @return
+     * @return The {@link Individual} indicated by the arguments
      */
     protected Individual getIndividual(final String[] args) {
-        Individual i = null;
         if (args.length > 0) {
-            if (args[0].matches("[0-9]+")) {
-                i = (Individual)gedcom.get(GEDCOMTag.INDIVIDUAL, parseInt(args[0]));
-            }
-        } else {
-            i = program.getLock();
+            try {
+                return  (Individual)geneBase.getUniqueMeta(GEDTag.INDI, args[0]);
+            } catch (NoUniqueMetaException ex) {}
         }
-        if (i == null) {
-            return Nobody.NOBODY;
-        }
-        return i;
+        return Individual.UNKNOWN;
+
     }
 
     /**
      *
      * @param args
-     * @return
+     * @return False if execution should escape the {@link AuthentiCmd} response loop
      */
-    public abstract boolean run(String[] args);
+    public abstract boolean run(final String[] args);
 }
