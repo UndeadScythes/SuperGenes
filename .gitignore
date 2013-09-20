@@ -12,9 +12,4 @@ nb*
 
 # Maven superfluity #
 
-src/test
 target
-
-# Project guff #
-
-test.yml

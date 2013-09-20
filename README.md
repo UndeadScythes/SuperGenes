@@ -1,7 +1,7 @@
-# SuperGenes - 0.2.15 #
+# SuperGenes - 0.3.1 #
 
 SuperGenes is primarily a [GEDCOM](http://en.wikipedia.org/wiki/GEDCOM) editor
-written with full support of standard version 5.5 and further 5.x versions. The
+written with full support of standard version 5.5 and further 5.5.x versions. The
 application can be run on the command line, supports a variety of different
 services and will eventually be expanded with an easy to use GUI.
 
@@ -11,11 +11,9 @@ once the GUI has been implemented.
 
 &copy; 2013 UndeadScythes of UndeadScythes' Empire
 
-Feel free to post issues and suggestions on GitHub at the address shown below.
-SuperGenes source code can be found on
-[GitHub](https://github.com/UndeadScythes/SuperGenes) and is released under the
-CC BY-NC-SA 2.0 UK license. A copy of this licence is located in the file named
-LICENCE.lic, if this file is not present the text can be found
-[here](http://creativecommons.org/licenses/by-nc-sa/2.0/uk/legalcode).
+Feel free to post issues and suggestions on [GitHub](https://github.com/UndeadScythes/SuperGenes).
+SuperGenes source code is released under the CC BY-NC-SA 2.0 UK license.
+A copy of this licence is located in the file named LICENCE.lic, if this file is
+not present the text can be found [here](http://creativecommons.org/licenses/by-nc-sa/2.0/uk/legalcode).
 
-Last edited on 2013-09-13.
+Last edited on 2013-09-20.
