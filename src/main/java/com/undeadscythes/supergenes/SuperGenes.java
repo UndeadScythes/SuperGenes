@@ -8,7 +8,8 @@ import static java.util.logging.Logger.*;
 
 /**
  * The main beef of {@link SuperGenes} is the map that contains a collection of
- * {@link GeneBase}s that can be manipulated using the various {@link Service}s.
+ * {@link GeneBase}s that can be manipulated using the various
+ * {@link com.undeadscythes.authenticmd.service.Service}s.
  *
  * @author UndeadScythes
  */
@@ -35,7 +36,8 @@ public class SuperGenes extends AuthentiCmd {
     }
 
     /**
-     * Add a new {@link GeneBase} with a {@link GEDCOM} loaded from the provided
+     * Add a new {@link GeneBase} with a
+     * {@link com.undeadscythes.genebase.gedcom.GEDCOM} loaded from the provided
      * file path.
      */
     public void addGeneBase(final String path, final GeneBase geneBase) {
@@ -44,7 +46,7 @@ public class SuperGenes extends AuthentiCmd {
 
     /**
      * Get the default {@link GeneBase} that will be used with all
-     * {@link Service}s executed.
+     * {@link com.undeadscythes.authenticmd.service.Service}s executed.
      */
     public GeneBase getDefault() {
         return defaultGeneBase;
@@ -52,7 +54,7 @@ public class SuperGenes extends AuthentiCmd {
 
     /**
      * Set the {@link GeneBase} which will be used by default for each
-     * {@link Service} executed.
+     * {@link com.undeadscythes.authenticmd.service.Service} executed.
      */
     public void setAuto(final GeneBase geneBase) {
         defaultGeneBase = geneBase;
