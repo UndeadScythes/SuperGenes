@@ -8,7 +8,7 @@ import com.undeadscythes.metaturtle.exception.*;
 
 /**
  * Validate a {@link String} by matching it with an {@link Individual}
- * {@link com.undeadscythes.metaturtle.UID} in a particular {@link GeneBase}.
+ * {@link com.undeadscythes.metaturtle.unique.UID} in a particular {@link GeneBase}.
  *
  * @author UndeadScythes
  */
@@ -18,7 +18,7 @@ public class IndividualValidator implements Validator {
 
     /**
      * Load a particular {@link GeneBase} to validate {@link Individual}
-     * {@link com.undeadscythes.metaturtle.UID}s.
+     * {@link com.undeadscythes.metaturtle.unique.UID}s.
      *
      * @param genebase
      */
