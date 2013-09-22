@@ -1,4 +1,4 @@
-# SuperGenes - 0.3.1 #
+# SuperGenes - 0.4.0 #
 
 SuperGenes is primarily a [GEDCOM](http://en.wikipedia.org/wiki/GEDCOM) editor
 written with full support of standard version 5.5 and further 5.5.x versions. The
@@ -16,4 +16,4 @@ SuperGenes source code is released under the CC BY-NC-SA 2.0 UK license.
 A copy of this licence is located in the file named LICENCE.lic, if this file is
 not present the text can be found [here](http://creativecommons.org/licenses/by-nc-sa/2.0/uk/legalcode).
 
-Last edited on 2013-09-20.
+Last edited on 2013-09-22.
