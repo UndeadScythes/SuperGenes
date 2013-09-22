@@ -4,7 +4,8 @@ import com.undeadscythes.genebase.comparator.*;
 import com.undeadscythes.genebase.gedcom.*;
 import com.undeadscythes.genebase.record.*;
 import com.undeadscythes.genebase.structure.*;
-import com.undeadscythes.metaturtle.*;
+import com.undeadscythes.metaturtle.metadata.*;
+import com.undeadscythes.metaturtle.unique.*;
 import com.undeadscythes.supergenes.exception.*;
 import java.util.*;
 
@@ -20,8 +21,8 @@ public class Timeline extends AncestryService {
                 return true;
             }
             final List<Event> events = new ArrayList<Event>(0);
-            for (UniqueMeta holder : geneBase.getUniqueMeta(GEDTag.INDI)) {
-                for (Metadata hol : holder.getByPath(GEDTag.EVEN.getTag())) {
+            for (UniqueMeta holder : geneBase.getUniqueMeta(RecordType.INDI)) {
+                for (Metadata hol : holder.getList(GEDTag.EVEN)) {
                     final Event eve = (Event)hol;
                     events.add(eve);
                 }
@@ -44,7 +45,7 @@ public class Timeline extends AncestryService {
         }
         out.println(indi.getFullName() + "'s timeline:");
 
-        for (Metadata holder : indi.getData(GEDTag.EVEN, SortByDate.INCREASING)) {
+        for (Metadata holder : indi.getSortedList(GEDTag.EVEN, SortByDate.INCREASING)) {
             final Event event = (Event)holder;
             String date = "0000-000-00 ";
             try {

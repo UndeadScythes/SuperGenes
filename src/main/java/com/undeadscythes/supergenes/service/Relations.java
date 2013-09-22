@@ -2,7 +2,7 @@ package com.undeadscythes.supergenes.service;
 
 import com.undeadscythes.genebase.gedcom.*;
 import com.undeadscythes.genebase.record.*;
-import com.undeadscythes.metaturtle.*;
+import com.undeadscythes.metaturtle.unique.*;
 import com.undeadscythes.supergenes.validator.*;
 import java.util.*;
 
@@ -30,7 +30,7 @@ public class Relations extends AncestryService {
 
     private void showRelations(final Individual indi) {
         final List<Family> families = new ArrayList<Family>(0);
-        for (UniqueMeta meta : geneBase.getUniqueMeta(GEDTag.FAM)) {
+        for (UniqueMeta meta : geneBase.getUniqueMeta(RecordType.FAM)) {
             final Family family = (Family)meta;
             if (family.hasMember(indi.getUID())) {
                 families.add(family);

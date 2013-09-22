@@ -28,7 +28,7 @@ public class IndividualValidator implements Validator {
 
     public boolean isValid(final String response) {
         try {
-            indi = (Individual)genebase.getUniqueMeta(GEDTag.INDI, response);
+            indi = (Individual)genebase.getUniqueMeta(RecordType.INDI, response);
             return true;
         } catch (NoUniqueMetaException ex) {
             return false;

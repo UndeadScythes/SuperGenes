@@ -46,7 +46,7 @@ public abstract class AncestryService implements Service {
     protected Individual getIndividual(final String[] args) {
         if (args.length > 0) {
             try {
-                return  (Individual)geneBase.getUniqueMeta(GEDTag.INDI, args[0]);
+                return  (Individual)geneBase.getUniqueMeta(RecordType.INDI, args[0]);
             } catch (NoUniqueMetaException ex) {}
         }
         return Individual.UNKNOWN;

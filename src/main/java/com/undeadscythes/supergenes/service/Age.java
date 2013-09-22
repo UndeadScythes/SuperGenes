@@ -27,7 +27,7 @@ public class Age extends AncestryService {
             year = parseInt(args[1]);
         }
         try {
-            final Event event = (Event)indi.getByPath("birt");
+            final Event event = (Event)indi.getList(GEDTag.BIRT);
             final int birth = event.getDate().year;
             if (birth == 0) throw new TagNotSetException(GEDTag.BIRT);
             out.println(indi.getFullName() + "'s age in " + year + " is ~" + (year - birth) + ".");

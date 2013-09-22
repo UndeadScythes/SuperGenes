@@ -11,7 +11,7 @@ public class TagNotSetException extends RuntimeException {
      *
      * @param tag
      */
-    public TagNotSetException(GEDTag tag) {
-        super("No value set for tag " + tag.getTag() + ".");
+    public TagNotSetException(final GEDTag tag) {
+        super("No value set for tag " + tag.getString() + ".");
     }
 }
