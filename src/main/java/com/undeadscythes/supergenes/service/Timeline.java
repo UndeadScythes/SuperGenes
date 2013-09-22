@@ -21,7 +21,7 @@ public class Timeline extends AncestryService {
             }
             final List<Event> events = new ArrayList<Event>(0);
             for (UniqueMeta holder : geneBase.getUniqueMeta(GEDTag.INDI)) {
-                for (Metadata hol : holder.getData(GEDTag.EVEN.getTag())) {
+                for (Metadata hol : holder.getByPath(GEDTag.EVEN.getTag())) {
                     final Event eve = (Event)hol;
                     events.add(eve);
                 }

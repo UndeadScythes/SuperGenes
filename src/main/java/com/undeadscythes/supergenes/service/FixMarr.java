@@ -12,10 +12,10 @@ public class FixMarr extends AncestryService {
     @Override
     public boolean run(final String[] args) {
         for (final UniqueMeta holder : geneBase.getUniqueMeta(GEDTag.INDI)) {
-            if (holder.getData("marr").size() != 1 || holder.getData("fams").size() != 1) continue;
+            if (holder.getByPath("marr").size() != 1 || holder.getByPath("fams").size() != 1) continue;
             for (final Family family: ((Individual)holder).getFamilies()) {
-                if (!Relation.PARENT.contains(family.getRelation(holder.getUID())) || family.getData("marr").size() > 0) continue;
-                family.add(holder.getData(GEDTag.MARR.getTag()).get(0));
+                if (!Relation.PARENT.contains(family.getRelation(holder.getUID())) || family.getByPath("marr").size() > 0) continue;
+                family.add(holder.getByPath(GEDTag.MARR.getTag()).get(0));
                 holder.remove(GEDTag.MARR.getTag());
             }
         }

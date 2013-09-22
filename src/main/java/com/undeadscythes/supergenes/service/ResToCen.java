@@ -11,7 +11,7 @@ public class ResToCen extends AncestryService {
     @Override
     public boolean run(final String[] args) {
         for (UniqueMeta u : geneBase.getUniqueMeta(GEDTag.INDI)) {
-            for (Metadata h : u.getData(GEDTag.RESI.toString())) {
+            for (Metadata h : u.getByPath(GEDTag.RESI.toString())) {
                 final Event e = ((Event)h);
                 switch (e.getDate().year) {
                     case 1841:
