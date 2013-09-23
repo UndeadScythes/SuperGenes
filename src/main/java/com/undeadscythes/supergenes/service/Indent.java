@@ -4,11 +4,14 @@ import com.undeadscythes.gedform.*;
 import java.util.*;
 
 /**
+ * Save a copy of the given {@link com.undeadscythes.genebase.gedcom.GEDCOM} to
+ * file with indentations to denote the record hierarchy.
+ *
  * @author UndeadScythes
  */
 public class Indent extends AncestryService {
     @Override
-    public boolean run(String[] args) {
+    public boolean run(final String[] args) {
         if (!out.openFile(geneBase.getUID() + ".uged")) {
             out.println("Cannot open output file.");
             return true;

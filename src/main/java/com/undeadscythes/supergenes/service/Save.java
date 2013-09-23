@@ -1,6 +1,9 @@
 package com.undeadscythes.supergenes.service;
 
 /**
+ * Save the given {@link com.undeadscythes.genebase.GeneBase} to file as a
+ * {@link com.undeadscythes.genebase.gedcom.GEDCOM}.
+ *
  * @author UndeadScythes
  */
 public class Save extends AncestryService {

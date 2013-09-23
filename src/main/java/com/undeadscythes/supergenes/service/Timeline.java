@@ -10,6 +10,9 @@ import com.undeadscythes.supergenes.exception.*;
 import java.util.*;
 
 /**
+ * Display the {@link Event events} associated with an
+ * {@link Individual individual} in chronological order.
+ *
  * @author UndeadScythes
  */
 public class Timeline extends AncestryService {

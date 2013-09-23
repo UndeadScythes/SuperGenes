@@ -12,7 +12,7 @@ import org.reflections.*;
  */
 public final class Main {
     /**
-     * @param args
+     * Pass command line arguments.
      */
     public static void main(final String[] args) {
         final SuperGenes superGenes = new SuperGenes();

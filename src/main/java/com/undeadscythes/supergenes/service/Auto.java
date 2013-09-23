@@ -7,6 +7,9 @@ import com.undeadscythes.supergenes.*;
 import com.undeadscythes.tipscript.*;
 
 /**
+ * Select a particular {@link GeneBase} to use by default in all future
+ * {@link Service services}.
+ *
  * @author UndeadScythes
  */
 public class Auto implements Service {

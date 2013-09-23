@@ -7,6 +7,8 @@ import com.undeadscythes.metaturtle.unique.*;
 import java.util.*;
 
 /**
+ * Find an {@link Individual individual} by name.
+ *
  * @author UndeadScythes
  */
 public class Find extends AncestryService {

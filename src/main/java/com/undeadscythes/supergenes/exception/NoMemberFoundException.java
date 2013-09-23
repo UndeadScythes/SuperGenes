@@ -1,15 +1,17 @@
 package com.undeadscythes.supergenes.exception;
 
 /**
+ * Thrown when a member is requested with a given ID and none is found.
+ *
  * @author UndeadScythes
  */
-@SuppressWarnings("serial")
 public class NoMemberFoundException extends Exception {
+    private static final long serialVersionUID = 1L;
+
     /**
-     *
-     * @param ID
+     * Pass the ID of the missing member.
      */
-    public NoMemberFoundException(int ID) {
-        super("No member with unique ID " + ID + " exists.");
+    public NoMemberFoundException(final int IDNo) {
+        super("No member with unique ID " + IDNo + " exists.");
     }
 }

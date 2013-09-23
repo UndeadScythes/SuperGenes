@@ -11,13 +11,30 @@ import com.undeadscythes.tipscript.*;
 import java.util.*;
 
 /**
+ * A wrapper of the basic {@link Service} class adding simple argument parsing
+ * and convenience fields for child classes.
+ *
  * @author UndeadScythes
  */
 public abstract class AncestryService implements Service {
+    /**
+     * The {@link GeneBase} that the parent {@link SuperGenes program} wants
+     * {@link Service services} to use by default.
+     */
     protected GeneBase geneBase;
+    /**
+     * The {@link TipScript output} method the parent {@link SuperGenes program}
+     * is using.
+     */
     protected TipScript out;
+    /**
+     * The {@link SuperGenes program} that ran this {@link Service}.
+     */
     protected SuperGenes program;
 
+    /**
+     * {@inheritDoc}
+     */
     public boolean run(final AuthentiCmd cmdHandler, final String[] args) {
         program = (SuperGenes)cmdHandler;
         geneBase = program.getDefault();
@@ -39,9 +56,7 @@ public abstract class AncestryService implements Service {
     }
 
     /**
-     *
-     * @param args
-     * @return The {@link Individual} indicated by the arguments
+     * Get the {@link Individual} indicated by the arguments.
      */
     protected Individual getIndividual(final String[] args) {
         if (args.length > 0) {
@@ -54,9 +69,8 @@ public abstract class AncestryService implements Service {
     }
 
     /**
-     *
-     * @param args
-     * @return False if execution should escape the {@link AuthentiCmd} response loop
+     * Return false if this {@link Service service} is requesting the parent
+     * {@link SuperGenes program} to quit.
      */
     public abstract boolean run(final String[] args);
 }

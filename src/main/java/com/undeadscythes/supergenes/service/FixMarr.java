@@ -7,6 +7,11 @@ import com.undeadscythes.metaturtle.exception.*;
 import com.undeadscythes.metaturtle.unique.*;
 
 /**
+ * Fixes {@link GEDTag#MARR marriage}
+ * {@link com.undeadscythes.genebase.structure.Event events} where the marriage
+ * is stored with an {@link Individual individuals} record and could be placed
+ * in an obvious {@link Family family} record.
+ *
  * @author UndeadScythes
  */
 public class FixMarr extends AncestryService {

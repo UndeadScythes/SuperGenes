@@ -7,6 +7,8 @@ import com.undeadscythes.supergenes.validator.*;
 import java.util.*;
 
 /**
+ * Display the direct relations of an {@link Individual individual}.
+ *
  * @author UndeadScythes
  */
 public class Relations extends AncestryService {
