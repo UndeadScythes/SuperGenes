@@ -1,6 +1,5 @@
 package supergenestest;
 
-import com.undeadscythes.supergenes.*;
 import com.undeadscythes.supergenes.service.*;
 import java.io.*;
 import static org.junit.Assert.*;
@@ -13,26 +12,78 @@ import supergenestest.implementation.*;
  */
 public class ServiceTest {
     @Test
-    public void testLoadFile() {
-        final SuperGenes program = new SuperGenes();
-        new Load().run(program, new String[]{"src/test/resources/test"});
-        assertEquals("load", 7, program.getGeneBase("test").getGEDCOM().size());
+    public void testLoad() {
+        final SuperTGC55C program = new SuperTGC55C();
+        assertEquals("load", 67, program.getGeneBase("TGC55C").getGEDCOM().size());
     }
 
     @Test
-    public void testValidYAML() throws FileNotFoundException, IOException {
-        new Yamlize().run(new SuperGenesImpl(), new String[]{"test"});
+    public void testYamlize() throws FileNotFoundException, IOException {
+        new Yamlize().run(new SuperTGC55C(), new String[]{"TGC55C"});
         final Yaml yaml = new Yaml();
-        final File file = new File("test.yml");
+        final File file = new File("TGC55C.yml");
         assertTrue("create", file.exists());
         final FileInputStream input = new FileInputStream(file);
         yaml.load(input);
         input.close();
-        assertTrue("delete", new File("test.yml").delete());
+        assertTrue("delete", new File("TGC55C.yml").delete());
     }
 
     @Test
-    public void timeline() {
-        new Timeline().run(new SuperGenesImpl(), new String[]{"test", "I1"});
+    public void testTimeline() {
+        new Timeline().run(new SuperTGC55C(), new String[]{"TGC55C", "PERSON4"});
+    }
+
+    @Test
+    public void testAge() {
+        new Age().run(new SuperTGC55C(), new String[]{"TGC55C", "PERSON4"});
+    }
+
+    @Test
+    public void testAuto() {
+        new Auto().run(new SuperTGC55C(), new String[]{"TGC55C", "TGC55C"});
+    }
+
+    @Test
+    public void testDump() {
+        new Dump().run(new SuperTGC55C(), new String[]{"TGC55C", ""});
+        assertTrue("delete", new File("TGC55C.dump").delete());
+    }
+
+    @Test
+    public void testFind() {
+        new Find().run(new SuperTGC55C(), new String[]{"TGC55C", "Rick"});
+    }
+
+    @Test
+    public void testFixMarr() {
+        new FixMarr().run(new SuperTGC55C(), new String[]{"TGC55C", ""});
+    }
+
+    @Test
+    public void testIndent() {
+        new Indent().run(new SuperTGC55C(), new String[]{"TGC55C", ""});
+        assertTrue("delete", new File("TGC55C.uged").delete());
+    }
+
+    @Test
+    public void testNewTag() {
+        new NewTag().run(new SuperTGC55C(), new String[]{"TGC55C", "_TEST"});
+    }
+
+    @Test
+    public void testRelations() {
+        new Relations().run(new SuperTGC55C(), new String[]{"TGC55C", "PERSON4"});
+    }
+
+    @Test
+    public void testResToCen() {
+        new ResToCen().run(new SuperTGC55C(), new String[]{"TGC55C", ""});
+    }
+
+    @Test
+    public void testSave() {
+        new Save().run(new SuperTGC55C(), new String[]{"TGC55C", "TGC55C"});
+        assertTrue("delete", new File("TGC55C.ged").delete());
     }
 }
