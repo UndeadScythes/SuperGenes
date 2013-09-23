@@ -2,18 +2,21 @@ package com.undeadscythes.supergenes;
 
 import com.undeadscythes.gedform.*;
 import com.undeadscythes.gedform.exception.*;
+import com.undeadscythes.genebase.*;
 import com.undeadscythes.genebase.gedcom.*;
 import com.undeadscythes.genebase.record.*;
 import java.text.*;
 import java.util.*;
 
 /**
+ * A customized {@link Header} to be used when saving {@link GEDCOM GEDCOMs}.
+ *
  * @author UndeadScythes
  */
 public class SuperGenesHeader extends Header {
     private static final long serialVersionUID = 1L;
 
-    private static Cluster getRecord(final GEDCOM gedcom) {
+    private static Cluster getRecord(final GeneBase geneBase) {
         final Cluster record = new Cluster(9);
         try {
             record.add(new LineStruct("0 HEAD"));
@@ -25,12 +28,14 @@ public class SuperGenesHeader extends Header {
             record.add(new LineStruct("4 CTRY England"));
             record.add(new LineStruct("3 EMAIL daveyognaut2@@gmail.com"));
             record.add(new LineStruct("3 WWW http://undeadscythes.com"));
-            try {
-                record.add(new LineStruct("2 DATA " + gedcom.pullCluster().getValue("SOUR")));
-                record.add(new LineStruct("1 DATE " + new SimpleDateFormat("dd MM yyyy").format(new Date()).toUpperCase()));
-            } catch (NoTagSetException ex) {}
+            if (geneBase != null) {
+                record.add(new LineStruct("2 DATA " + geneBase.getFirstFromPath("HEAD.SOUR").getValue()));
+            }
+            record.add(new LineStruct("1 DATE " + new SimpleDateFormat("dd MM yyyy").format(new Date()).toUpperCase()));
             record.add(new LineStruct("2 TIME " + new SimpleDateFormat("HH:mm").format(new Date())));
-            record.add(new LineStruct("1 FILE " + gedcom.getFileName()));
+            if (geneBase != null) {
+                record.add(new LineStruct("1 FILE " + geneBase.getGEDCOM().getFileName()));
+            }
             record.add(new LineStruct("1 COPR Copyright " + new SimpleDateFormat("yyyy ").format(new Date()) + System.getProperties().getProperty("user.name")));
             record.add(new LineStruct("1 GEDC"));
             record.add(new LineStruct("2 VERS 5.5.1"));
@@ -41,10 +46,16 @@ public class SuperGenesHeader extends Header {
     }
 
     /**
-     *
-     * @param gedcom
+     * Return a standard {@link Header} specific to {@link SuperGenes}.
      */
-    public SuperGenesHeader(final GEDCOM gedcom) {
-        super(getRecord(gedcom));
+    public static SuperGenesHeader getStandard() {
+        return new SuperGenesHeader(null);
+    }
+
+    /**
+     * Return a custom {@link Header} as a parent of the given {@link GEDCOM}.
+     */
+    public SuperGenesHeader(final GeneBase geneBase) {
+        super(getRecord(geneBase));
     }
 }
