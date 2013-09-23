@@ -3,7 +3,9 @@ package com.undeadscythes.supergenes;
 import com.undeadscythes.authenticmd.*;
 import com.undeadscythes.genebase.*;
 import com.undeadscythes.tipscript.*;
+import java.io.*;
 import java.util.*;
+import java.util.logging.*;
 
 /**
  * The main beef of {@link SuperGenes} is the map that contains a collection of
@@ -28,7 +30,16 @@ public class SuperGenes extends AuthentiCmd {
     }
 
     /**
-     * Grab a {@link GeneBase} with the specified name.
+     * Allows a superclass to specify its own input and outputs.
+     *
+     * @see AuthentiCmd#AuthentiCmd(InputStream, TipScript)
+     */
+    protected SuperGenes(final InputStream input, final TipScript output) {
+        super(input, output);
+    }
+
+    /**
+     * Get a {@link GeneBase} with the specified name.
      */
     public GeneBase getGeneBase(final String name) {
         return genebases.get(name);
