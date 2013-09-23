@@ -8,7 +8,7 @@ import com.undeadscythes.genebase.record.*;
 import com.undeadscythes.metaturtle.exception.*;
 import com.undeadscythes.supergenes.*;
 import com.undeadscythes.tipscript.*;
-import static java.util.Arrays.*;
+import java.util.*;
 
 /**
  * @author UndeadScythes
@@ -33,7 +33,7 @@ public abstract class AncestryService implements Service {
                 out.println("Connot find requested GEDCOM.");
                 return true;
             }
-            newArgs = copyOfRange(args, 1, args.length);
+            newArgs = Arrays.copyOfRange(args, 1, args.length);
         }
         return run(newArgs);
     }

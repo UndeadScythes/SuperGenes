@@ -4,7 +4,6 @@ import com.undeadscythes.genebase.comparator.*;
 import com.undeadscythes.genebase.gedcom.*;
 import com.undeadscythes.genebase.record.*;
 import com.undeadscythes.metaturtle.unique.*;
-import static java.util.Collections.*;
 import java.util.*;
 
 /**
@@ -24,7 +23,7 @@ public class Find extends AncestryService {
             out.println("No matches found.");
             return true;
         }
-        sort(matches, SortByName.ASCENDING);
+        Collections.sort(matches, SortByName.ASCENDING);
         for (Individual indi : matches) {
             final String name = indi.getFamilyName();
             out.println("- " + (name.isEmpty() ? "" : name + ", ") + indi.getGivenName() + " (" + indi.getUID() + ")");

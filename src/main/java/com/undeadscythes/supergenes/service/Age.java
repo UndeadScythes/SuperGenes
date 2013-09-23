@@ -5,9 +5,7 @@ import com.undeadscythes.genebase.record.*;
 import com.undeadscythes.genebase.structure.*;
 import com.undeadscythes.metaturtle.exception.*;
 import com.undeadscythes.supergenes.exception.*;
-import static java.lang.Integer.*;
 import java.util.*;
-import static java.util.Calendar.*;
 
 /**
  * Calculate the age of an {@link Individual}.
@@ -22,9 +20,9 @@ public class Age extends AncestryService {
             out.println("Cannot find individual.");
             return true;
         }
-        int year = getInstance().get(Calendar.YEAR);
+        int year = Calendar.getInstance().get(Calendar.YEAR);
         if (args.length == 2 && args[1].matches("[0-9]+")) {
-            year = parseInt(args[1]);
+            year = Integer.parseInt(args[1]);
         }
         try {
             final Event event = (Event)indi.getList(GEDTag.BIRT);

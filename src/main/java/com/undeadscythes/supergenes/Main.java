@@ -2,7 +2,7 @@ package com.undeadscythes.supergenes;
 
 import com.undeadscythes.authenticmd.service.*;
 import java.util.*;
-import static org.apache.commons.lang3.StringUtils.*;
+import org.apache.commons.lang3.*;
 import org.reflections.*;
 
 /**
@@ -22,7 +22,7 @@ public final class Main {
             services.add(clazz.getName());
         }
         superGenes.setServices(services, true);
-        if (args.length == 0 || superGenes.executeCmds("Executing commandline...", join(args, " ").split("-"))) {
+        if (args.length == 0 || superGenes.executeCmds("Executing commandline...", StringUtils.join(args, " ").split("-"))) {
             while (superGenes.getCommand("", 3));
         }
         superGenes.output.println("Closing...");

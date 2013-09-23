@@ -4,7 +4,6 @@ import com.undeadscythes.authenticmd.*;
 import com.undeadscythes.genebase.*;
 import com.undeadscythes.tipscript.*;
 import java.util.*;
-import static java.util.logging.Logger.*;
 
 /**
  * The main beef of {@link SuperGenes} is the map that contains a collection of
@@ -25,7 +24,7 @@ public class SuperGenes extends AuthentiCmd {
      * @see AuthentiCmd#AuthentiCmd(InputStream, TipScript)
      */
     public SuperGenes() {
-        super(System.in, new TipScript(getLogger(SuperGenes.class.getName()), "SuperGenes:> "));
+        super(System.in, new TipScript(Logger.getLogger(SuperGenes.class.getName()), "SuperGenes:> "));
     }
 
     /**
