@@ -6,6 +6,9 @@ import com.undeadscythes.genebase.gedcom.*;
 import java.util.*;
 
 /**
+ * Save the requested {@link com.undeadscythes.genebase.GeneBase} into a YAML
+ * version of its source {@link GEDCOM}.
+ *
  * @author UndeadScythes
  */
 public class Yamlize extends AncestryService {
@@ -17,7 +20,6 @@ public class Yamlize extends AncestryService {
         } catch (ParsingException ex) {}
     }
 
-    @Override
     public boolean run(final String[] args) {
         if (!out.openFile(geneBase.getUID() + ".yml")) {
             out.println("Cannot read this file.");
@@ -48,14 +50,22 @@ public class Yamlize extends AncestryService {
         string.append(prefix).append("- ").append(line.tag).append(":");
         if (!line.value.isEmpty()) {
             if (next.level > line.level) {
-                string.append("\n").append(prefix).append("  - Value: ").append(line.value);
+                string.append("\n").append(prefix).append("  - Value: ").append(sanitize(line.value));
             } else {
-                string.append(" ").append(line.value);
+                string.append(" ").append(sanitize(line.value));
             }
         }
         if (!line.xref.isEmpty()) {
             string.append("\n").append(prefix).append("  - XREF: ").append(line.xref);
         }
         return string.toString();
+    }
+
+    private String sanitize(final String string) {
+        String value = string.replace("\n", " ## ").replaceAll(":", "#");
+        if (!value.isEmpty() && !String.valueOf(value.charAt(0)).matches("[0-9a-zA-Z]")) {
+            value = "#" + value;
+        }
+        return value;
     }
 }
