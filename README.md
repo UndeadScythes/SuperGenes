@@ -1,4 +1,4 @@
-# SuperGenes - Alpha-1.0 #
+# SuperGenes - Alpha-1.1-SNAPSHOT #
 
 SuperGenes is primarily a [GEDCOM](http://en.wikipedia.org/wiki/GEDCOM) editor
 written with full support of standard version 5.5 and further 5.5.x versions. The
