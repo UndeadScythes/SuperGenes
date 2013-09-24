@@ -2,6 +2,7 @@ package com.undeadscythes.supergenes.service;
 
 import com.undeadscythes.genebase.gedcom.*;
 import com.undeadscythes.genebase.record.*;
+import com.undeadscythes.metaturtle.metadata.*;
 import com.undeadscythes.supergenes.*;
 
 /**
@@ -18,6 +19,7 @@ public class Save extends AncestryService {
             output = args[0] + ".ged";
         }
         final Header header = (Header)geneBase.getFirst("HEAD");
+        header.add(new Metadata("FILE", geneBase.getGEDCOM().getFileName()));
         geneBase.remove("HEAD");
         geneBase.add(new SuperGenesHeader(header));
         out.openFile(output);
