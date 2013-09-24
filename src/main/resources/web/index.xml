@@ -1,0 +1,7 @@
+<hr>
+<div id='main'>
+  <h3>GEDCOM Details</h3>
+  <ul>
+    <?ged gedcom?>
+  </ul>
+</div>

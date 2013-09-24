@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><?ged title?></title>
+    <meta http-equiv='content-type' content='text/html; charset=utf-8'>
+    <link rel='stylesheet' type='text/css' href='<?ged prefix?>supergenes.css'>
+  </head>
+  <body>
+    <div id='menu'>
+      <ul>
+	<li><a href='<?ged prefix?>index.html'>Home</a></li>
+	<li><a href='<?ged prefix?>directory.html'>Directory</a></li>
+	<li><a href='<?ged prefix?>indi/I1.html'>Root</a></li>
+      </ul>
+    </div>
+    <hr>
+    <h1><?ged h1?></h1>
+    <h2><?ged h2?></h2>
+    <?ged main?>
+  </body>
+</html>
