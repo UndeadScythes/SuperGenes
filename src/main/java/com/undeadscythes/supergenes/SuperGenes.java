@@ -15,7 +15,7 @@ import java.util.logging.*;
  * @author UndeadScythes
  */
 public class SuperGenes extends AuthentiCmd {
-    private Map<String, GeneBase> genebases = new HashMap<String, GeneBase>(0);
+    private Map<String, GeneBase> geneBases = new HashMap<String, GeneBase>(0);
     private GeneBase defaultGeneBase = null;
 
     /**
@@ -42,7 +42,7 @@ public class SuperGenes extends AuthentiCmd {
      * Get a {@link GeneBase} with the specified name.
      */
     public GeneBase getGeneBase(final String name) {
-        return genebases.get(name);
+        return geneBases.get(name);
     }
 
     /**
@@ -51,7 +51,7 @@ public class SuperGenes extends AuthentiCmd {
      * file path.
      */
     public void addGeneBase(final String path, final GeneBase geneBase) {
-        genebases.put(geneBase.getUID().toString(), geneBase);
+        geneBases.put(geneBase.getUID().toString(), geneBase);
     }
 
     /**
@@ -66,7 +66,7 @@ public class SuperGenes extends AuthentiCmd {
      * Set the {@link GeneBase} which will be used by default for each
      * {@link com.undeadscythes.authenticmd.service.Service} executed.
      */
-    public void setAuto(final GeneBase geneBase) {
+    public void setDefault(final GeneBase geneBase) {
         defaultGeneBase = geneBase;
     }
 
@@ -75,5 +75,26 @@ public class SuperGenes extends AuthentiCmd {
      */
     public TipScript getTipScript() {
         return output;
+    }
+
+    /**
+     * Get a collection of all stored {@link GeneBase GeneBases}.
+     */
+    public Collection<GeneBase> getGeneBases() {
+        return geneBases.values();
+    }
+
+    /**
+     * Create a clone of this {@link SuperGenes program} with a different
+     * {@link TipScript output}.
+     */
+    public SuperGenes clone(final TipScript output) {
+        final SuperGenes clone = new SuperGenes(System.in, output);
+        clone.setDefault(defaultGeneBase);
+        clone.setServices(getServices());
+        for (GeneBase geneBase : geneBases.values()) {
+            clone.addGeneBase(geneBase.getUID().toString(), geneBase);
+        }
+        return clone;
     }
 }
