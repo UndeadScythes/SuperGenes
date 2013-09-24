@@ -23,14 +23,14 @@ public class SuperGenesHeader extends Header {
             record.add(new LineStruct("2 VERS " + SuperGenesHeader.class.getPackage().getImplementationVersion()));
             record.add(new LineStruct("2 NAME SuperGenes"));
             record.add(new LineStruct("2 CORP UndeadScythes' Empire"));
-            record.add(new LineStruct("3 ADDR"));
+            record.add(new LineStruct("3 ADDR England"));
             record.add(new LineStruct("4 CTRY England"));
             record.add(new LineStruct("3 EMAIL daveyognaut2@@gmail.com"));
             record.add(new LineStruct("3 WWW http://undeadscythes.com"));
             if (header != null) {
                 record.add(new LineStruct("2 DATA " + header.getFirstFromPath("SOUR").getValue()));
             }
-            record.add(new LineStruct("1 DATE " + new SimpleDateFormat("dd MM yyyy").format(new Date()).toUpperCase()));
+            record.add(new LineStruct("1 DATE " + new SimpleDateFormat("dd MMM yyyy").format(new Date()).toUpperCase()));
             record.add(new LineStruct("2 TIME " + new SimpleDateFormat("HH:mm").format(new Date())));
             if (header != null) {
                 record.add(new LineStruct("1 FILE " + header.getFirstFromPath("FILE").getValue()));
@@ -39,7 +39,7 @@ public class SuperGenesHeader extends Header {
             record.add(new LineStruct("1 GEDC"));
             record.add(new LineStruct("2 VERS 5.5.1"));
             record.add(new LineStruct("2 FORM LINEAGE-LINKED"));
-            record.add(new LineStruct("1 CHAR" + System.getProperties().getProperty("file.encoding")));
+            record.add(new LineStruct("1 CHAR " + System.getProperties().getProperty("file.encoding"))); //TODO: Fix encoding
         } catch (ParsingException ex) {}
         return record;
     }
