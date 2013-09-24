@@ -2,7 +2,6 @@ package com.undeadscythes.supergenes;
 
 import com.undeadscythes.gedform.*;
 import com.undeadscythes.gedform.exception.*;
-import com.undeadscythes.genebase.*;
 import com.undeadscythes.genebase.gedcom.*;
 import com.undeadscythes.genebase.record.*;
 import java.text.*;
@@ -16,7 +15,7 @@ import java.util.*;
 public class SuperGenesHeader extends Header {
     private static final long serialVersionUID = 1L;
 
-    private static Cluster getRecord(final GeneBase geneBase) {
+    private static Cluster getRecord(final Header header) {
         final Cluster record = new Cluster(9);
         try {
             record.add(new LineStruct("0 HEAD"));
@@ -28,13 +27,13 @@ public class SuperGenesHeader extends Header {
             record.add(new LineStruct("4 CTRY England"));
             record.add(new LineStruct("3 EMAIL daveyognaut2@@gmail.com"));
             record.add(new LineStruct("3 WWW http://undeadscythes.com"));
-            if (geneBase != null) {
-                record.add(new LineStruct("2 DATA " + geneBase.getFirstFromPath("HEAD.SOUR").getValue()));
+            if (header != null) {
+                record.add(new LineStruct("2 DATA " + header.getFirstFromPath("SOUR").getValue()));
             }
             record.add(new LineStruct("1 DATE " + new SimpleDateFormat("dd MM yyyy").format(new Date()).toUpperCase()));
             record.add(new LineStruct("2 TIME " + new SimpleDateFormat("HH:mm").format(new Date())));
-            if (geneBase != null) {
-                record.add(new LineStruct("1 FILE " + geneBase.getGEDCOM().getFileName()));
+            if (header != null) {
+                record.add(new LineStruct("1 FILE " + header.getFirstFromPath("FILE").getValue()));
             }
             record.add(new LineStruct("1 COPR Copyright " + new SimpleDateFormat("yyyy ").format(new Date()) + System.getProperties().getProperty("user.name")));
             record.add(new LineStruct("1 GEDC"));
@@ -55,7 +54,7 @@ public class SuperGenesHeader extends Header {
     /**
      * Return a custom {@link Header} as a parent of the given {@link GEDCOM}.
      */
-    public SuperGenesHeader(final GeneBase geneBase) {
-        super(getRecord(geneBase));
+    public SuperGenesHeader(final Header header) {
+        super(getRecord(header));
     }
 }

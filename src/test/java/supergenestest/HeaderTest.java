@@ -13,7 +13,7 @@ public class HeaderTest {
     @Test
     public void testCustomHeader() {
         assertEquals("getName", "SuperGenes", SuperGenesHeader.getStandard().getFirstFromPath("SOUR.NAME").getValue());
-        final Header header = new SuperGenesHeader(new SuperTGC55C().getGeneBase("TGC55C"));
+        final Header header = new SuperGenesHeader((Header)new SuperTGC55C().getGeneBase("TGC55C").getFirst("HEAD"));
         assertEquals("getName", "GEDitCOM", header.getFirstFromPath("SOUR.DATA").getValue());
     }
 }
