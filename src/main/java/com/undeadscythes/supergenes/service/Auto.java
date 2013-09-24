@@ -12,7 +12,7 @@ import com.undeadscythes.tipscript.*;
  *
  * @author UndeadScythes
  */
-public class Auto implements Service {
+public class Auto extends Service {
     public boolean run(final AuthentiCmd cmdHandler, final String[] args) {
         final SuperGenes program = (SuperGenes)cmdHandler;
         final TipScript out = program.getTipScript();
@@ -25,7 +25,7 @@ public class Auto implements Service {
             out.println("Connot find requested GEDCOM.");
             return true;
         }
-        program.setAuto(genebase);
+        program.setDefault(genebase);
         out.println("Default GEDCOM set to " + genebase.getUID() + ".");
         return true;
     }

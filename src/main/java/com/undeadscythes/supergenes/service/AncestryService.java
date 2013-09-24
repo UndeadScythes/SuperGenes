@@ -16,7 +16,7 @@ import java.util.*;
  *
  * @author UndeadScythes
  */
-public abstract class AncestryService implements Service {
+public abstract class AncestryService extends Service {
     /**
      * The {@link GeneBase} that the parent {@link SuperGenes program} wants
      * {@link Service services} to use by default.

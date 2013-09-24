@@ -11,7 +11,7 @@ import com.undeadscythes.supergenes.*;
  *
  * @author UndeadScythes
  */
-public class NewTag implements Service {
+public class NewTag extends Service {
     /**
      * {@inheritDoc}
      */
