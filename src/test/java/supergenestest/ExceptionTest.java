@@ -14,7 +14,7 @@ public class ExceptionTest {
         try {
             throw new GEDCOMLoadException("test", 3, new NullPointerException());
         } catch (GEDCOMLoadException ex) {
-            assertEquals("GEDCOMLoad", "Could not parse 'test' on line 3.", ex.getMessage());
+            assertEquals("Could not parse 'test' on line 3.", ex.getMessage());
         }
     }
 
@@ -23,7 +23,7 @@ public class ExceptionTest {
         try {
             throw new NoMemberFoundException(3);
         } catch (NoMemberFoundException ex) {
-            assertEquals("NoMemberFound", "No member with unique ID 3 exists.", ex.getMessage());
+            assertEquals("No member with unique ID 3 exists.", ex.getMessage());
         }
     }
 
@@ -32,7 +32,7 @@ public class ExceptionTest {
         try {
             throw new TagNotSetException(GEDTag.ABBR);
         } catch (TagNotSetException ex) {
-            assertEquals("TagNotSet", "No value set for tag ABBR.", ex.getMessage());
+            assertEquals("No value set for tag ABBR.", ex.getMessage());
         }
     }
 }

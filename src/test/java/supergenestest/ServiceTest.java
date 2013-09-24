@@ -14,7 +14,7 @@ public class ServiceTest {
     @Test
     public void testLoad() {
         final SuperTGC55C program = new SuperTGC55C();
-        assertEquals("load", 67, program.getGeneBase("TGC55C").getGEDCOM().size());
+        assertEquals(67, program.getGeneBase("TGC55C").getGEDCOM().size());
     }
 
     @Test
@@ -22,11 +22,11 @@ public class ServiceTest {
         new Yamlize().run(new SuperTGC55C(), new String[]{"TGC55C"});
         final Yaml yaml = new Yaml();
         final File file = new File("TGC55C.yml");
-        assertTrue("create", file.exists());
+        assertTrue(file.exists());
         final FileInputStream input = new FileInputStream(file);
         yaml.load(input);
         input.close();
-        assertTrue("delete", new File("TGC55C.yml").delete());
+        assertTrue(new File("TGC55C.yml").delete());
     }
 
     @Test
@@ -47,7 +47,7 @@ public class ServiceTest {
     @Test
     public void testDump() {
         new Dump().run(new SuperTGC55C(), new String[]{"TGC55C", ""});
-        assertTrue("delete", new File("TGC55C.dump").delete());
+        assertTrue(new File("TGC55C.dump").delete());
     }
 
     @Test
@@ -63,7 +63,7 @@ public class ServiceTest {
     @Test
     public void testIndent() {
         new Indent().run(new SuperTGC55C(), new String[]{"TGC55C", ""});
-        assertTrue("delete", new File("TGC55C.uged").delete());
+        assertTrue(new File("TGC55C.uged").delete());
     }
 
     @Test
@@ -84,6 +84,6 @@ public class ServiceTest {
     @Test
     public void testSave() {
         new Save().run(new SuperTGC55C(), new String[]{"TGC55C", "TGC55C"});
-        assertTrue("delete", new File("TGC55C.ged").delete());
+        assertTrue(new File("TGC55C.ged").delete());
     }
 }
