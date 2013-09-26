@@ -6,25 +6,36 @@
 
   <groupId>com.undeadscythes</groupId>
   <artifactId>SuperGenes</artifactId>
-  <version>Alpha-1.1-SNAPSHOT</version>
+  <version>Alpha-2.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <dependencies>
     <dependency>
-      <groupId>com.undeadscythes</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>GeneBase</artifactId>
       <version>Alpha-1.1-SNAPSHOT</version>
       <type>jar</type>
     </dependency>
     <dependency>
-      <groupId>com.undeadscythes</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>AuthentiCmd</artifactId>
       <version>Alpha-3.0-SNAPSHOT</version>
       <type>jar</type>
     </dependency>
     <dependency>
-      <groupId>com.undeadscythes</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>SuperGenesWebify</artifactId>
       <version>Alpha-1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>TipScript</artifactId>
+      <version>Alpha-3.2-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>HyperForm</artifactId>
+      <version>Alpha-1.1-SNAPSHOT</version>
+      <type>jar</type>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -49,12 +60,6 @@
       <artifactId>snakeyaml</artifactId>
       <version>1.13</version>
       <scope>test</scope>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>com.undeadscythes</groupId>
-      <artifactId>HyperForm</artifactId>
-      <version>Alpha-1.1-SNAPSHOT</version>
       <type>jar</type>
     </dependency>
   </dependencies>
