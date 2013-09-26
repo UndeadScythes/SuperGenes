@@ -7,7 +7,7 @@ import com.undeadscythes.genebase.*;
  *
  * @author UndeadScythes
  */
-public class Individual extends PageBuilder {
+public class IndividualWeb extends PageBuilder {
     @Override
     public boolean publish(final String rootDir, final GeneBase geneBase) {
         return true;

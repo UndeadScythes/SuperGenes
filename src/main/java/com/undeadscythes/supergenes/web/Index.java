@@ -2,6 +2,7 @@ package com.undeadscythes.supergenes.web;
 
 import com.undeadscythes.genebase.*;
 import com.undeadscythes.hyperform.*;
+import com.undeadscythes.metaturtle.exception.*;
 import com.undeadscythes.metaturtle.metadata.*;
 import java.io.*;
 
@@ -29,8 +30,12 @@ public final class Index extends PageBuilder {
 
     private String getHeader() {
         final StringBuilder output = new StringBuilder("");
-        for (Metadata fact : geneBase.getFirst("HEAD")) {
-            output.append(getData(fact));
+        try {
+            for (Metadata fact : geneBase.getFirst("HEAD")) {
+                output.append(getData(fact));
+            }
+        } catch (NoMetadataSetException ex) {
+            output.append("No header data available.");
         }
         return output.toString();
     }

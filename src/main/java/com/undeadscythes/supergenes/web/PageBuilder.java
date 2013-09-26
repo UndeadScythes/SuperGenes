@@ -36,9 +36,7 @@ public abstract class PageBuilder {
             }
             output.append("</ul>");
         }
-        try {
-            output.append(getCitations(meta));
-        } catch (NoMetadataSetException ex) {}
+        output.append(getCitations(meta));
         return output.toString();
     }
 
