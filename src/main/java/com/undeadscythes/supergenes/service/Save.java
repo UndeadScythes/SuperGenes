@@ -2,7 +2,7 @@ package com.undeadscythes.supergenes.service;
 
 import com.undeadscythes.genebase.gedcom.*;
 import com.undeadscythes.genebase.record.*;
-import com.undeadscythes.metaturtle.metadata.*;
+import com.undeadscythes.metaturtle.exception.*;
 import com.undeadscythes.supergenes.*;
 
 /**
@@ -18,16 +18,23 @@ public class Save extends AncestryService {
         if (args.length > 0) {
             output = args[0] + ".ged";
         }
-        final Header header = (Header)geneBase.getFirst("HEAD");
-        header.add(new Metadata("FILE", geneBase.getGEDCOM().getFileName()));
-        geneBase.remove("HEAD");
-        geneBase.add(new SuperGenesHeader(header));
+        String source = "";
+        Header header = null;
+        try {
+            header = (Header)geneBase.remove("HEAD");
+            source = header.getFirst("SOUR").getValue();
+        } catch (NoMetadataSetException ex) {}
+        geneBase.add(new SuperGenesHeader(source, geneBase.getGEDCOM().getFileName()));
         out.openFile(output);
         geneBase.save(out);
         out.closeFile();
         out.println("GeneBase saved to " + output + ".");
-        geneBase.remove("HEAD");
-        geneBase.add(header);
+        try {
+            geneBase.remove("HEAD");
+        } catch (NoMetadataSetException ex) {}
+        if (header == null) {
+            geneBase.add(header);
+        }
         return true;
     }
 }
