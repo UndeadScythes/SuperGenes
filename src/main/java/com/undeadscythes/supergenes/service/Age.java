@@ -1,11 +1,11 @@
 package com.undeadscythes.supergenes.service;
 
-import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.record.*;
-import com.undeadscythes.genebase.structure.*;
-import com.undeadscythes.metaturtle.exception.*;
-import com.undeadscythes.supergenes.exception.*;
-import java.util.*;
+import com.undeadscythes.genebase.gedcom.GEDTag;
+import com.undeadscythes.genebase.record.Individual;
+import com.undeadscythes.genebase.structure.Date;
+import com.undeadscythes.genebase.structure.Event;
+import com.undeadscythes.metaturtle.exception.NoMetadataSetException;
+import java.util.Calendar;
 
 /**
  * Calculate the age of an {@link Individual}.
@@ -25,13 +25,10 @@ public class Age extends AncestryService {
             year = Integer.parseInt(args[1]);
         }
         try {
-            final Event event = (Event)indi.getList(GEDTag.BIRT);
-            final int birth = event.getDate().year;
-            if (birth == 0) throw new TagNotSetException(GEDTag.BIRT);
+            final Event event = (Event)indi.getFirst(GEDTag.BIRT);
+            final Date date = event.getDate();
+            final int birth = date.year;
             out.println(indi.getFullName() + "'s age in " + year + " is ~" + (year - birth) + ".");
-
-        } catch (TagNotSetException ex) {
-            out.println("Unknown age, no birth year recorded.");
         } catch (NoMetadataSetException ex) {
             out.println("Unknown age, no birth year recorded.");
         }
