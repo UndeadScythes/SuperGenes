@@ -15,7 +15,7 @@ import java.util.*;
 public class SuperGenesHeader extends Header {
     private static final long serialVersionUID = 1L;
 
-    private static Cluster getRecord(final Header header) {
+    private static Cluster getRecord(final String source, final String file) {
         final Cluster record = new Cluster(9);
         try {
             record.add(new LineStruct("0 HEAD"));
@@ -27,14 +27,10 @@ public class SuperGenesHeader extends Header {
             record.add(new LineStruct("4 CTRY England"));
             record.add(new LineStruct("3 EMAIL daveyognaut2@@gmail.com"));
             record.add(new LineStruct("3 WWW http://undeadscythes.com"));
-            if (header != null) {
-                record.add(new LineStruct("2 DATA " + header.getFirstFromPath("SOUR").getValue()));
-            }
+            record.add(new LineStruct("2 DATA " + source));
             record.add(new LineStruct("1 DATE " + new SimpleDateFormat("dd MMM yyyy").format(new Date()).toUpperCase()));
             record.add(new LineStruct("2 TIME " + new SimpleDateFormat("HH:mm").format(new Date())));
-            if (header != null) {
-                record.add(new LineStruct("1 FILE " + header.getFirstFromPath("FILE").getValue()));
-            }
+            record.add(new LineStruct("1 FILE " + file));
             record.add(new LineStruct("1 COPR Copyright " + new SimpleDateFormat("yyyy ").format(new Date()) + System.getProperties().getProperty("user.name")));
             record.add(new LineStruct("1 GEDC"));
             record.add(new LineStruct("2 VERS 5.5.1"));
@@ -48,13 +44,13 @@ public class SuperGenesHeader extends Header {
      * Return a standard {@link Header} specific to {@link SuperGenes}.
      */
     public static SuperGenesHeader getStandard() {
-        return new SuperGenesHeader(null);
+        return new SuperGenesHeader("", "");
     }
 
     /**
      * Return a custom {@link Header} as a parent of the given {@link GEDCOM}.
      */
-    public SuperGenesHeader(final Header header) {
-        super(getRecord(header));
+    public SuperGenesHeader(final String source, final String file) {
+        super(getRecord(source, file));
     }
 }
