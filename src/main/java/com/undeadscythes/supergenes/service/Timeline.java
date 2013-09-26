@@ -1,13 +1,17 @@
 package com.undeadscythes.supergenes.service;
 
-import com.undeadscythes.genebase.comparator.*;
-import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.record.*;
-import com.undeadscythes.genebase.structure.*;
-import com.undeadscythes.metaturtle.metadata.*;
-import com.undeadscythes.metaturtle.unique.*;
-import com.undeadscythes.supergenes.exception.*;
-import java.util.*;
+import com.undeadscythes.genebase.comparator.SortByDate;
+import com.undeadscythes.genebase.gedcom.GEDTag;
+import com.undeadscythes.genebase.gedcom.RecordType;
+import com.undeadscythes.genebase.record.Individual;
+import com.undeadscythes.genebase.structure.Event;
+import com.undeadscythes.genebase.structure.Place;
+import com.undeadscythes.metaturtle.exception.NoMetadataSetException;
+import com.undeadscythes.metaturtle.metadata.Metadata;
+import com.undeadscythes.metaturtle.unique.UniqueMeta;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Display the {@link Event events} associated with an
@@ -35,7 +39,7 @@ public class Timeline extends AncestryService {
                 String date = "0000-000-00 ";
                 try {
                     date = event.getDate().toString();
-                } catch (TagNotSetException ex) {}
+                } catch (NoMetadataSetException ex) {}
                 final Place place = event.getPlace();
                 out.printf(date + " " + event.getValue() + (place.isEmpty() ? "" : " at " + place));
             }
@@ -53,11 +57,9 @@ public class Timeline extends AncestryService {
             String date = "0000-000-00 ";
             try {
                 date = event.getDate().toString();
-            } catch (TagNotSetException ex) {}
+            } catch (NoMetadataSetException ex) {}
             String place = "";
-            try {
-                place = event.getPlace().toString();
-            } catch (TagNotSetException ex) {}
+            place = event.getPlace().toString();
             out.println("- " + date + " " + event.getValue() + (place.isEmpty() ? "" : " at " + place));
         }
         return true;
