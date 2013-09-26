@@ -1,4 +1,4 @@
-package com.undeadscythes.supergenes.gui;
+package com.undeadscythes.supergenes.gui.menu;
 
 import java.io.*;
 import javax.swing.filechooser.FileFilter;
