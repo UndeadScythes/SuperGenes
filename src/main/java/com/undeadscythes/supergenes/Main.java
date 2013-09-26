@@ -12,13 +12,14 @@ public final class Main {
     private static final List<String> SERVICES;
 
     static {
-        final String[] services = new String[]{"Age", "Auto", "Dump", "Find", "FixMarr", "Indent", "Load", "NewTag", "Relations", "ResToCen", "Save", "Timeline", "Yamlize"};
+        final String[] services = new String[]{
+            "Age","Auto", "Dump", "Find", "FixMarr", "Gui", "Indent", "Load",
+            "NewTag", "Relations", "ResToCen", "Save", "Timeline", "Web",
+            "Yamlize"};
         SERVICES = new ArrayList<String>(services.length);
         for (String service : services) {
             SERVICES.add("com.undeadscythes.supergenes.service." + service);
         }
-        SERVICES.add("com.undeadscythes.supergenes.web.Web");
-        SERVICES.add("com.undeadscythes.supergenes.gui.Gui");
     }
     /**
      * Pass command line arguments.

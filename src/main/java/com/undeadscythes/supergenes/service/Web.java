@@ -1,7 +1,9 @@
-package com.undeadscythes.supergenes.web;
+package com.undeadscythes.supergenes.service;
 
 import com.undeadscythes.authenticmd.service.*;
 import com.undeadscythes.supergenes.service.*;
+import com.undeadscythes.supergenes.web.CSS;
+import com.undeadscythes.supergenes.web.Index;
 import java.io.*;
 //import com.undeadscythes.supergenes.OLD.*;
 //import com.undeadscythes.supergenes.event.*;
