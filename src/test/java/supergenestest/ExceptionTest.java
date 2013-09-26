@@ -1,6 +1,5 @@
 package supergenestest;
 
-import com.undeadscythes.genebase.gedcom.*;
 import com.undeadscythes.supergenes.exception.*;
 import static org.junit.Assert.*;
 import org.junit.*;
@@ -24,15 +23,6 @@ public class ExceptionTest {
             throw new NoMemberFoundException(3);
         } catch (NoMemberFoundException ex) {
             assertEquals("No member with unique ID 3 exists.", ex.getMessage());
-        }
-    }
-
-    @Test
-    public void testTagNotSetException() {
-        try {
-            throw new TagNotSetException(GEDTag.ABBR);
-        } catch (TagNotSetException ex) {
-            assertEquals("No value set for tag ABBR.", ex.getMessage());
         }
     }
 }

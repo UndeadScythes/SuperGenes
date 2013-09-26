@@ -1,11 +1,15 @@
 package supergenestest;
 
 import com.undeadscythes.supergenes.service.*;
-import java.io.*;
-import static org.junit.Assert.*;
-import org.junit.*;
-import org.yaml.snakeyaml.*;
-import supergenestest.implementation.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+import org.yaml.snakeyaml.Yaml;
+import supergenestest.implementation.SuperTGC55C;
 
 /**
  * @author UndeadScythes
