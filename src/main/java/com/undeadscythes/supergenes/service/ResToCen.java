@@ -1,10 +1,12 @@
 package com.undeadscythes.supergenes.service;
 
-import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.structure.*;
-import com.undeadscythes.metaturtle.exception.*;
-import com.undeadscythes.metaturtle.metadata.*;
-import com.undeadscythes.metaturtle.unique.*;
+import com.undeadscythes.genebase.gedcom.GEDTag;
+import com.undeadscythes.genebase.gedcom.RecordType;
+import com.undeadscythes.genebase.structure.Date;
+import com.undeadscythes.genebase.structure.Event;
+import com.undeadscythes.metaturtle.exception.NoMetadataSetException;
+import com.undeadscythes.metaturtle.metadata.Metadata;
+import com.undeadscythes.metaturtle.unique.UniqueMeta;
 
 /**
  * Convert {@link GEDTag#RESI residency} events to {@link GEDTag#CENS census}
@@ -16,9 +18,9 @@ public class ResToCen extends AncestryService {
     @Override
     public boolean run(final String[] args) {
         for (UniqueMeta unique : geneBase.getUniqueMeta(RecordType.INDI)) {
-            try {
-                for (Metadata meta : unique.getList(GEDTag.RESI)) {
-                    final Event event = ((Event)meta);
+            for (Metadata meta : unique.getList(GEDTag.RESI)) {
+                final Event event = ((Event)meta);
+                try {
                     switch (event.getDate().year) {
                         case 1841:
                             event.setDate(new Date("6 6 1841"));
@@ -53,8 +55,8 @@ public class ResToCen extends AncestryService {
                             event.setTag(GEDTag.CENS);
                             break;
                     }
-                }
-            } catch (NoMetadataSetException ex) {}
+                } catch (NoMetadataSetException ex) {}
+            }
         }
         out.println("Converted all residence events to census events.");
         return true;
