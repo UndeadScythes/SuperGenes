@@ -13,16 +13,19 @@ import com.undeadscythes.supergenes.SuperGenesHeader;
 public class Save extends AncestryService {
     @Override
     protected boolean run(final String[] args) {
-        String output = geneBase.getUID().toString();
+        String output = "";
         if (args.length > 0) {
             output = args[0];
         }
-        if (!output.endsWith(".ged")) output += ".ged";
+        if (output.isEmpty()) {
+            output = geneBase.getUID().toString();
+        }
+        if (!output.endsWith(".ged")) {
+            output += ".ged";
+        }
         String source = "";
-        Header header = null;
         try {
-            header = (Header)geneBase.remove("HEAD");
-            source = header.getFirst("SOUR").getValue();
+            source = ((Header)geneBase.remove("HEAD")).getFirst("SOUR").getValue();
         } catch (NoMetadataSetException ex) {}
         geneBase.add(new SuperGenesHeader(source, geneBase.getGEDCOM().getFileName()));
         out.openFile(output);
