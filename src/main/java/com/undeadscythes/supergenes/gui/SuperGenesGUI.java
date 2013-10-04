@@ -241,6 +241,7 @@ public class SuperGenesGUI extends JFrame {
         setTitle("SuperGenes");
         setMinimumSize(new java.awt.Dimension(640, 480));
 
+        main.setFocusable(false);
         main.addTab("Welcome", welcome);
         main.setTabComponentAt(main.indexOfComponent(welcome), new CloseableTab(main, "Welcome"));
 
