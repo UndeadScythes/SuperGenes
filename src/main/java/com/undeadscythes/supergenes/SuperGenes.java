@@ -1,11 +1,12 @@
 package com.undeadscythes.supergenes;
 
-import com.undeadscythes.authenticmd.*;
-import com.undeadscythes.genebase.*;
-import com.undeadscythes.tipscript.*;
-import java.io.*;
+import com.undeadscythes.authenticmd.AuthentiCmd;
+import com.undeadscythes.genebase.GeneBase;
+import com.undeadscythes.metaturtle.unique.UID;
+import com.undeadscythes.tipscript.TipScript;
+import java.io.InputStream;
 import java.util.*;
-import java.util.logging.*;
+import java.util.logging.Logger;
 
 /**
  * The main beef of {@link SuperGenes} is the map that contains a collection of
@@ -42,16 +43,35 @@ public class SuperGenes extends AuthentiCmd {
      * Get a {@link GeneBase} with the specified name.
      */
     public GeneBase getGeneBase(final String name) {
+        if (!geneBases.containsKey(name)) return GeneBase.NULL_GENEBASE;
         return geneBases.get(name);
     }
 
     /**
-     * Add a new {@link GeneBase} with a
-     * {@link com.undeadscythes.genebase.gedcom.GEDCOM} loaded from the provided
-     * file path.
+     * Add a new {@link GeneBase}.
      */
-    public void addGeneBase(final String path, final GeneBase geneBase) {
-        geneBases.put(geneBase.getUID().toString(), geneBase);
+    public void addGeneBase(final GeneBase geneBase) {
+        addGeneBase(geneBase.getUID().toString(), geneBase);
+    }
+
+    /**
+     * Add a {@link GeneBase} with a given name.
+     */
+    public void addGeneBase(final String name, final GeneBase geneBase) {
+        geneBases.put(name, geneBase);
+    }
+
+    /**
+     * Remove the GeneBase with a given UID.
+     */
+    public void removeGeneBase(final UID uid) {
+        final Iterator<Map.Entry<String, GeneBase>> i = geneBases.entrySet().iterator();
+        while (i.hasNext()) {
+            if (i.next().getValue().getUID().equals(uid)) {
+                i.remove();
+                break;
+            }
+        }
     }
 
     /**
@@ -74,7 +94,7 @@ public class SuperGenes extends AuthentiCmd {
      * Get the {@link TipScript} used by this program to handle output.
      */
     public TipScript getTipScript() {
-        return output;
+        return getOutput();
     }
 
     /**
@@ -93,7 +113,7 @@ public class SuperGenes extends AuthentiCmd {
         clone.setDefault(defaultGeneBase);
         clone.setServices(getServices());
         for (GeneBase geneBase : geneBases.values()) {
-            clone.addGeneBase(geneBase.getUID().toString(), geneBase);
+            clone.addGeneBase(geneBase);
         }
         return clone;
     }

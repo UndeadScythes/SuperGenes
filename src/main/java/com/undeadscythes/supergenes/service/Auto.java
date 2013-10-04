@@ -1,10 +1,10 @@
 package com.undeadscythes.supergenes.service;
 
-import com.undeadscythes.authenticmd.*;
-import com.undeadscythes.authenticmd.service.*;
-import com.undeadscythes.genebase.*;
-import com.undeadscythes.supergenes.*;
-import com.undeadscythes.tipscript.*;
+import com.undeadscythes.authenticmd.AuthentiCmd;
+import com.undeadscythes.authenticmd.service.Service;
+import com.undeadscythes.genebase.GeneBase;
+import com.undeadscythes.supergenes.SuperGenes;
+import com.undeadscythes.tipscript.TipScript;
 
 /**
  * Select a particular {@link GeneBase} to use by default in all future
@@ -13,6 +13,7 @@ import com.undeadscythes.tipscript.*;
  * @author UndeadScythes
  */
 public class Auto extends Service {
+    @Override
     public boolean run(final AuthentiCmd cmdHandler, final String[] args) {
         final SuperGenes program = (SuperGenes)cmdHandler;
         final TipScript out = program.getTipScript();
@@ -21,7 +22,7 @@ public class Auto extends Service {
             return true;
         }
         final GeneBase genebase = program.getGeneBase(args[0]);
-        if (genebase == null) {
+        if (genebase.isNull()) {
             out.println("Connot find requested GEDCOM.");
             return true;
         }

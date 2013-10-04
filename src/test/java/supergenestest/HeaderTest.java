@@ -12,8 +12,8 @@ import org.junit.*;
 public class HeaderTest {
     @Test
     public void testCustomHeader() throws NoMetadataSetException {
-        assertEquals("SuperGenes", SuperGenesHeader.getStandard().getFirstFromPath("SOUR.NAME").getValue());
+        assertEquals("SuperGenes", SuperGenesHeader.getStandard().getFirst("SOUR.NAME").getValue());
         final Header header = new SuperGenesHeader("GEDitCOM", "");
-        assertEquals("GEDitCOM", header.getFirstFromPath("SOUR.DATA").getValue());
+        assertEquals("GEDitCOM", header.getFirst("SOUR.DATA").getValue());
     }
 }

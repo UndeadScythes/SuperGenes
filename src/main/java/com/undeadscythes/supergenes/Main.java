@@ -1,7 +1,9 @@
 package com.undeadscythes.supergenes;
 
-import java.util.*;
-import org.apache.commons.lang3.*;
+import com.undeadscythes.authenticmd.exception.TerminationRequest;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Runtime class for {@link SuperGenes}.
@@ -24,13 +26,20 @@ public final class Main {
     /**
      * Pass command line arguments.
      */
+    @SuppressWarnings("empty-statement")
     public static void main(final String[] args) {
         final SuperGenes superGenes = new SuperGenes();
         superGenes.setServices(SERVICES, true);
-        if (args.length == 0 || superGenes.executeCmds("Executing commandline...", StringUtils.join(args, " ").split("-"))) {
-            while (superGenes.getCommand("", 3));
+        if (args.length == 0) {
+            try {
+                while (superGenes.getCommand("", 3));
+            } catch (TerminationRequest ex) {}
+        } else {
+            try {
+                superGenes.executeCmds("Executing commandline...", StringUtils.join(args, " ").split("-"));
+            } catch (TerminationRequest ex) {}
         }
-        superGenes.output.println("Closing...");
+        superGenes.getOutput().println("Closing...");
     }
 
     private Main() {}

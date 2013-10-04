@@ -1,13 +1,13 @@
 package com.undeadscythes.supergenes.service;
 
-import com.undeadscythes.authenticmd.*;
-import com.undeadscythes.authenticmd.service.*;
-import com.undeadscythes.gedform.exception.*;
-import com.undeadscythes.genebase.*;
-import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.supergenes.*;
-import com.undeadscythes.tipscript.*;
-import java.io.*;
+import com.undeadscythes.authenticmd.AuthentiCmd;
+import com.undeadscythes.authenticmd.service.Service;
+import com.undeadscythes.gedform.exception.ParsingException;
+import com.undeadscythes.genebase.GeneBase;
+import com.undeadscythes.genebase.gedcom.GEDCOM;
+import com.undeadscythes.supergenes.SuperGenes;
+import com.undeadscythes.tipscript.TipScript;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Load a {@link GEDCOM} from file and parse it into a {@link GeneBase}.
@@ -34,7 +34,7 @@ public class Load extends Service {
             } else {
                 geneBase = new GeneBase(new GEDCOM(fileName));
             }
-            program.addGeneBase(geneBase.getUID().toString(), geneBase);
+            program.addGeneBase(geneBase);
             out.println("Loaded GEDCOM " + geneBase.getUID() + " from " + fileName + ".");
         } catch (ParsingException ex) {
             out.println("Parsing error: " + ex.getMessage());

@@ -9,9 +9,7 @@ import com.undeadscythes.genebase.structure.Place;
 import com.undeadscythes.metaturtle.exception.NoMetadataSetException;
 import com.undeadscythes.metaturtle.metadata.Metadata;
 import com.undeadscythes.metaturtle.unique.UniqueMeta;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Display the {@link Event events} associated with an
@@ -40,8 +38,12 @@ public class Timeline extends AncestryService {
                 try {
                     date = event.getDate().toString();
                 } catch (NoMetadataSetException ex) {}
-                final Place place = event.getPlace();
-                out.printf(date + " " + event.getValue() + (place.isEmpty() ? "" : " at " + place));
+                final Place place;
+                try {
+                    place = event.getPlace();
+                    out.printf(date + " " + event.getValue() + (place.isEmpty() ? "" : " at " + place));
+                } catch (NoMetadataSetException ex) {}
+                out.printf(date + " " + event.getValue());
             }
             out.closeFile();
             out.println("Timeline saved to " + geneBase.getUID() + ".tl.");
@@ -59,8 +61,10 @@ public class Timeline extends AncestryService {
                 date = event.getDate().toString();
             } catch (NoMetadataSetException ex) {}
             String place = "";
-            place = event.getPlace().toString();
-            out.println("- " + date + " " + event.getValue() + (place.isEmpty() ? "" : " at " + place));
+            try {
+                place = event.getPlace().toString();
+            } catch (NoMetadataSetException ex) {}
+            out.println(date + " " + event.getValue() + (place.isEmpty() ? "" : " at " + place));
         }
         return true;
     }

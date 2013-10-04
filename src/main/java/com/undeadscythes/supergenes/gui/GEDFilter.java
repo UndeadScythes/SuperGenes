@@ -1,6 +1,6 @@
-package com.undeadscythes.supergenes.gui.menu;
+package com.undeadscythes.supergenes.gui;
 
-import java.io.*;
+import java.io.File;
 import javax.swing.filechooser.FileFilter;
 
 /**
@@ -9,6 +9,8 @@ import javax.swing.filechooser.FileFilter;
  * @author UndeadScythes
  */
 public class GEDFilter extends FileFilter {
+    public static final GEDFilter FILTER = new GEDFilter();
+
     @Override
     public boolean accept(final File file) {
         return file.getName().endsWith(".ged") || file.isDirectory();

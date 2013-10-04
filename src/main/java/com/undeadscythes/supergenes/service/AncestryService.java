@@ -1,14 +1,14 @@
 package com.undeadscythes.supergenes.service;
 
-import com.undeadscythes.authenticmd.*;
-import com.undeadscythes.authenticmd.service.*;
-import com.undeadscythes.genebase.*;
-import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.record.*;
-import com.undeadscythes.metaturtle.exception.*;
-import com.undeadscythes.supergenes.*;
-import com.undeadscythes.tipscript.*;
-import java.util.*;
+import com.undeadscythes.authenticmd.AuthentiCmd;
+import com.undeadscythes.authenticmd.service.Service;
+import com.undeadscythes.genebase.GeneBase;
+import com.undeadscythes.genebase.gedcom.RecordType;
+import com.undeadscythes.genebase.record.Individual;
+import com.undeadscythes.metaturtle.exception.NoUniqueMetaException;
+import com.undeadscythes.supergenes.SuperGenes;
+import com.undeadscythes.tipscript.TipScript;
+import java.util.Arrays;
 
 /**
  * A wrapper of the basic {@link Service} class adding simple argument parsing
@@ -72,5 +72,5 @@ public abstract class AncestryService extends Service {
      * Return false if this {@link Service service} is requesting the parent
      * {@link SuperGenes program} to quit.
      */
-    public abstract boolean run(final String[] args);
+    protected abstract boolean run(final String[] args);
 }
