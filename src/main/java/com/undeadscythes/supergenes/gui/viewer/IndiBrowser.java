@@ -104,18 +104,18 @@ public class IndiBrowser extends JPanel {
         }
         fact.removeAll();
         for (Holder data : indi.getListByType(TagType.FACT)) {
-            fact.add(new JLabel(data.getFormal() + ": " + data.getValue()));
+            fact.add(new JLabel(data.getFormal() + ": " + data.getFriendly()));
         }
         even.removeAll();
         for (Holder data : indi.getListByType(TagType.EVENT)) {
-            even.add(new JLabel(data.getFormal() + ": " + ((Event)data).toString()));
+            even.add(new JLabel(data.getFormal() + ": " + ((Event)data).getFriendly()));
         }
         custom.removeAll();
         for (Holder data : indi.getListByType(TagType.CUSTOM)) {
-            custom.add(new JLabel(data.getFormal() + ": " + data.toString()));
+            custom.add(new JLabel(data.getFormal() + ": " + data.getFriendly()));
         }
         for (Holder data : indi.getListByType(TagType.OTHER)) {
-            custom.add(new JLabel(data.getFormal() + ": " + data.toString()));
+            custom.add(new JLabel(data.getFormal() + ": " + data.getFriendly()));
         }
         parents.removeAll();
         for (Metadata data : indi.getList(Tag.FAMC.getGEDTag())) {
