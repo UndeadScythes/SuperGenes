@@ -23,11 +23,6 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>SuperGenesWebify</artifactId>
-      <version>Alpha-1.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
       <artifactId>TipScript</artifactId>
       <version>Alpha-3.2-SNAPSHOT</version>
     </dependency>
@@ -48,6 +43,16 @@
       <artifactId>commons-io</artifactId>
       <version>2.4</version>
       <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.jdesktop</groupId>
+      <artifactId>beansbinding</artifactId>
+      <version>1.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.undeadscythes</groupId>
+      <artifactId>SwingLow</artifactId>
+      <version>Alpha-1.0-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -120,6 +125,8 @@
 		  <excludes>
 		    <exclude>web/</exclude>
 		    <exclude>web</exclude>
+		    <exclude>gui/</exclude>
+		    <exclude>gui</exclude>
 		  </excludes>
                 </resource>
               </resources>
@@ -161,16 +168,16 @@
     </plugins>
   </build>
 
-  <name>SuperGenes</name>
-  <description>SuperGenes is primarily a [GEDCOM](http://en.wikipedia.org/wiki/GEDCOM) editor
+  <name>${project.artifactId}</name>
+  <description>${project.artifactId} is primarily a [GEDCOM](http://en.wikipedia.org/wiki/GEDCOM) editor
 written with full support of standard version 5.5 and further 5.5.x versions. The
 application can be run on the command line, supports a variety of different
 services and will eventually be expanded with an easy to use GUI.
 
-A superb feature of SuperGenes is its ability to generate a fully operational
-HTML/CSS based website very quickly. This website will support customizations
-once the GUI has been implemented.</description>
-  <url>https://github.com/UndeadScythes/SuperGenes</url>
+A superb feature of ${project.artifactId} is its ability to generate a fully
+operational HTML/CSS based website very quickly. This website will support
+customizations once the GUI has been implemented.</description>
+  <url>https://github.com/UndeadScythes/${project.artifactId}</url>
   <inceptionYear>2012</inceptionYear>
   <licenses>
     <license>
