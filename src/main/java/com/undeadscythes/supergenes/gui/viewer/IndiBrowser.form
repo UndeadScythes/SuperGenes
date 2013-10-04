@@ -75,7 +75,7 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="fact" pref="333" max="32767" attributes="0"/>
+                          <Component id="fact" pref="348" max="32767" attributes="0"/>
                           <Component id="even" alignment="0" max="32767" attributes="0"/>
                           <Component id="custom" alignment="0" max="32767" attributes="0"/>
                           <Component id="parents" alignment="0" max="32767" attributes="0"/>

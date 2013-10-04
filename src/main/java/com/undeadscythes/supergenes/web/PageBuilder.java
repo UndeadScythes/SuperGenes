@@ -1,11 +1,12 @@
 package com.undeadscythes.supergenes.web;
 
-import com.undeadscythes.genebase.*;
-import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.holder.*;
-import com.undeadscythes.metaturtle.exception.*;
-import com.undeadscythes.metaturtle.metadata.*;
-import java.util.*;
+import com.undeadscythes.genebase.GeneBase;
+import com.undeadscythes.genebase.gedcom.GEDTag;
+import com.undeadscythes.genebase.gedcom.GEDTag.Tag;
+import com.undeadscythes.genebase.holder.Holder;
+import com.undeadscythes.metaturtle.metadata.Metadata;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class provides basic tools for generating web pages.
@@ -22,7 +23,7 @@ public abstract class PageBuilder {
      */
     protected String getData(final Metadata meta) {
         final StringBuilder output = new StringBuilder("");
-        final String formal = GEDTag.getByName(meta.getProperty()).getFormal();
+        final String formal = GEDTag.getByName(meta.getProperty().toString()).getFormal();
         output.append("<li>").append(formal).append(": ");
         if (meta.getValue().toLowerCase().startsWith("http")) {
             output.append("<a target='_blank' href='").append(meta.getValue()).append("'>").append(meta.getValue()).append("</a>");
@@ -55,13 +56,17 @@ public abstract class PageBuilder {
      */
     protected String getCitations(final Metadata meta) {
         final StringBuilder output = new StringBuilder("");
-        for (Metadata citation : meta.getList(GEDTag.SOUR)) {
+        for (Metadata citation : meta.getList(Tag.SOUR.getGEDTag())) {
             if (!indexes.containsKey(citation.getValue())) {
                 indexes.put(citation.getValue(), index);
                 citations.put(index, (Holder)citation);
                 index++;
             }
-            output.append("<a class='citation' href='#" + indexes.get(citation.getValue()) + "'>[" + indexes.get(citation.getValue()) + "]</a>");
+            output.append("<a class='citation' href='#")
+                  .append(indexes.get(citation.getValue()))
+                  .append("'>[")
+                  .append(indexes.get(citation.getValue()))
+                  .append("]</a>");
         }
         output.append("</li>");
         return output.toString();

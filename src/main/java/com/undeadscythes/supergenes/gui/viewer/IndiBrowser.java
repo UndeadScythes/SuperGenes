@@ -3,6 +3,7 @@ package com.undeadscythes.supergenes.gui.viewer;
 import com.undeadscythes.genebase.GeneBase;
 import com.undeadscythes.genebase.comparator.SortByName;
 import com.undeadscythes.genebase.gedcom.GEDTag;
+import com.undeadscythes.genebase.gedcom.GEDTag.Tag;
 import com.undeadscythes.genebase.gedcom.GEDTag.TagType;
 import com.undeadscythes.genebase.gedcom.RecordType;
 import com.undeadscythes.genebase.record.Family;
@@ -103,21 +104,21 @@ public class IndiBrowser extends JPanel {
         }
         fact.removeAll();
         for (Metadata data : indi.getListByType(TagType.FACT)) {
-            fact.add(new JLabel(GEDTag.getByName(data.getProperty()).getFormal() + ": " + data.getValue()));
+            fact.add(new JLabel(GEDTag.getByName(data.getProperty().toString()).getFormal() + ": " + data.getValue()));
         }
         even.removeAll();
         for (Metadata data : indi.getListByType(TagType.EVENT)) {
-            even.add(new JLabel(GEDTag.getByName(data.getProperty()).getFormal() + ": " + ((Event)data).toString()));
+            even.add(new JLabel(GEDTag.getByName(data.getProperty().toString()).getFormal() + ": " + ((Event)data).toString()));
         }
         custom.removeAll();
         for (Metadata data : indi.getListByType(TagType.CUSTOM)) {
-            custom.add(new JLabel(GEDTag.getByName(data.getProperty()).getFormal() + ": " + data.toString()));
+            custom.add(new JLabel(GEDTag.getByName(data.getProperty().toString()).getFormal() + ": " + data.toString()));
         }
         for (Metadata data : indi.getListByType(TagType.OTHER)) {
-            custom.add(new JLabel(GEDTag.getByName(data.getProperty()).getFormal() + ": " + data.toString()));
+            custom.add(new JLabel(GEDTag.getByName(data.getProperty().toString()).getFormal() + ": " + data.toString()));
         }
         parents.removeAll();
-        for (Metadata data : indi.getList(GEDTag.FAMC)) {
+        for (Metadata data : indi.getList(Tag.FAMC.getGEDTag())) {
             final Family family;
             try {
                 family = (Family)geneBase.getUniqueMeta(RecordType.FAM, data.getValue());
@@ -131,7 +132,7 @@ public class IndiBrowser extends JPanel {
             parents.add(button);
         }
         spouses.removeAll();
-        for (Metadata data : indi.getList(GEDTag.FAMS)) {
+        for (Metadata data : indi.getList(Tag.FAMS.getGEDTag())) {
             final Family family;
             try {
                 family = (Family)geneBase.getUniqueMeta(RecordType.FAM, data.getValue());

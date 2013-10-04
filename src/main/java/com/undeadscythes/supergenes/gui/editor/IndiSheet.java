@@ -1,7 +1,7 @@
 package com.undeadscythes.supergenes.gui.editor;
 
 import com.undeadscythes.genebase.GeneBase;
-import com.undeadscythes.genebase.gedcom.GEDTag;
+import com.undeadscythes.genebase.gedcom.GEDTag.Tag;
 import com.undeadscythes.genebase.holder.Holder;
 import com.undeadscythes.genebase.record.Individual;
 import com.undeadscythes.metaturtle.unique.UID;
@@ -162,8 +162,8 @@ public class IndiSheet extends JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         final Individual indi = new Individual(new UID());
-        indi.add(new Holder(GEDTag.NAME, jTextField1.getText() + " /" + jTextField2.getText() + "/"));
-        indi.add(new Holder(GEDTag.SEX, (jRadioButton1.isSelected() ? "M" : (jRadioButton2.isSelected() ? "F" : "U"))));
+        indi.add(new Holder(Tag.NAME.getGEDTag(), jTextField1.getText() + " /" + jTextField2.getText() + "/"));
+        indi.add(new Holder(Tag.SEX.getGEDTag(), (jRadioButton1.isSelected() ? "M" : (jRadioButton2.isSelected() ? "F" : "U"))));
         geneBase.addUniqueMeta(indi);
         gui.footer.setText("Individual saved.");
         gui.removeTab(this);

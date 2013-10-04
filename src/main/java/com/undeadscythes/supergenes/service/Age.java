@@ -1,6 +1,6 @@
 package com.undeadscythes.supergenes.service;
 
-import com.undeadscythes.genebase.gedcom.GEDTag;
+import com.undeadscythes.genebase.gedcom.GEDTag.Tag;
 import com.undeadscythes.genebase.record.Individual;
 import com.undeadscythes.genebase.structure.Date;
 import com.undeadscythes.genebase.structure.Event;
@@ -25,7 +25,7 @@ public class Age extends AncestryService {
             year = Integer.parseInt(args[1]);
         }
         try {
-            final Event event = (Event)indi.getFirst(GEDTag.BIRT);
+            final Event event = (Event)indi.getFirst(Tag.BIRT.getGEDTag());
             final Date date = event.getDate();
             final int birth = date.year;
             out.println(indi.getFullName() + "'s age in " + year + " is ~" + (year - birth) + ".");
