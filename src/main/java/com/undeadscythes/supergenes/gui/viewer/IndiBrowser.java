@@ -2,10 +2,10 @@ package com.undeadscythes.supergenes.gui.viewer;
 
 import com.undeadscythes.genebase.GeneBase;
 import com.undeadscythes.genebase.comparator.SortByName;
-import com.undeadscythes.genebase.gedcom.GEDTag;
+import com.undeadscythes.genebase.gedcom.*;
 import com.undeadscythes.genebase.gedcom.GEDTag.Tag;
 import com.undeadscythes.genebase.gedcom.GEDTag.TagType;
-import com.undeadscythes.genebase.gedcom.RecordType;
+import com.undeadscythes.genebase.holder.Holder;
 import com.undeadscythes.genebase.record.Family;
 import com.undeadscythes.genebase.record.Individual;
 import com.undeadscythes.genebase.structure.Event;
@@ -103,19 +103,19 @@ public class IndiBrowser extends JPanel {
             return;
         }
         fact.removeAll();
-        for (Metadata data : indi.getListByType(TagType.FACT)) {
-            fact.add(new JLabel(GEDTag.getByName(data.getProperty().toString()).getFormal() + ": " + data.getValue()));
+        for (Holder data : indi.getListByType(TagType.FACT)) {
+            fact.add(new JLabel(data.getFormal() + ": " + data.getValue()));
         }
         even.removeAll();
-        for (Metadata data : indi.getListByType(TagType.EVENT)) {
-            even.add(new JLabel(GEDTag.getByName(data.getProperty().toString()).getFormal() + ": " + ((Event)data).toString()));
+        for (Holder data : indi.getListByType(TagType.EVENT)) {
+            even.add(new JLabel(data.getFormal() + ": " + ((Event)data).toString()));
         }
         custom.removeAll();
-        for (Metadata data : indi.getListByType(TagType.CUSTOM)) {
-            custom.add(new JLabel(GEDTag.getByName(data.getProperty().toString()).getFormal() + ": " + data.toString()));
+        for (Holder data : indi.getListByType(TagType.CUSTOM)) {
+            custom.add(new JLabel(data.getFormal() + ": " + data.toString()));
         }
-        for (Metadata data : indi.getListByType(TagType.OTHER)) {
-            custom.add(new JLabel(GEDTag.getByName(data.getProperty().toString()).getFormal() + ": " + data.toString()));
+        for (Holder data : indi.getListByType(TagType.OTHER)) {
+            custom.add(new JLabel(data.getFormal() + ": " + data.toString()));
         }
         parents.removeAll();
         for (Metadata data : indi.getList(Tag.FAMC.getGEDTag())) {
