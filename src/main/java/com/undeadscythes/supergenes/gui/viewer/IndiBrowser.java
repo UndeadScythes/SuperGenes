@@ -2,9 +2,9 @@ package com.undeadscythes.supergenes.gui.viewer;
 
 import com.undeadscythes.genebase.GeneBase;
 import com.undeadscythes.genebase.comparator.SortByName;
-import com.undeadscythes.genebase.gedcom.*;
 import com.undeadscythes.genebase.gedcom.GEDTag.Tag;
 import com.undeadscythes.genebase.gedcom.GEDTag.TagType;
+import com.undeadscythes.genebase.gedcom.RecordType;
 import com.undeadscythes.genebase.holder.Holder;
 import com.undeadscythes.genebase.record.Family;
 import com.undeadscythes.genebase.record.Individual;
@@ -16,8 +16,7 @@ import com.undeadscythes.supergenes.gui.*;
 import com.undeadscythes.supergenes.gui.editor.IndiSheet;
 import com.undeadscythes.supergenes.gui.listener.FamilyListener;
 import com.undeadscythes.supergenes.gui.listener.IndiListListener;
-import com.undeadscythes.swinglow.CloseableTabPane;
-import com.undeadscythes.swinglow.HoverButton;
+import com.undeadscythes.swinglow.*;
 import java.util.*;
 import javax.swing.*;
 
@@ -27,7 +26,7 @@ import javax.swing.*;
  *
  * @author UndeadScythes
  */
-public class IndiBrowser extends JPanel {
+public class IndiBrowser extends UpdateablePanel {
     private static final long serialVersionUID = 1L;
     private final GeneBase geneBase;
     private final IndiListListener indiListListener = new IndiListListener(this);
@@ -43,6 +42,12 @@ public class IndiBrowser extends JPanel {
         this.geneBase = geneBase;
         familyListener = new FamilyListener(gui);
         initComponents();
+        gui2.footer.setText("Opened GeneBase " + geneBase.getUID() + ".");
+        loadIndis();
+        gui2.footer.done();
+    }
+
+    private void loadIndis() {
         final List<Individual> indis = new ArrayList<Individual>(0);
         gui2.footer.pulse();
         for (UniqueMeta meta : geneBase.getUniqueMeta(RecordType.INDI)) {
@@ -87,8 +92,6 @@ public class IndiBrowser extends JPanel {
         dirTabs.addTab(currentChar, scroll);
         dirAll.setModel(master);
         dirAll.addListSelectionListener(indiListListener);
-        gui2.footer.done();
-        gui2.footer.setText("Opened GeneBase " + geneBase.getUID() + ".");
     }
 
     /**
@@ -150,6 +153,11 @@ public class IndiBrowser extends JPanel {
         right.repaint();
     }
 
+    @Override
+    public void updateData() {
+        loadIndis();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -204,7 +212,7 @@ public class IndiBrowser extends JPanel {
         details.setLayout(detailsLayout);
         detailsLayout.setHorizontalGroup(
             detailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fact, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+            .addComponent(fact, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
             .addComponent(even, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(custom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(parents, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

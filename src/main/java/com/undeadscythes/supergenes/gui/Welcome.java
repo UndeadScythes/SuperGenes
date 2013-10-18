@@ -1,6 +1,5 @@
 package com.undeadscythes.supergenes.gui;
 
-import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
@@ -33,20 +32,19 @@ public class Welcome extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        final javax.swing.JPanel lower = new javax.swing.JPanel();
-        final javax.swing.Box.Filler left = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        final javax.swing.JPanel buttons = new javax.swing.JPanel();
+        title = new javax.swing.JLabel();
+        columns = new javax.swing.JPanel();
+        left = new javax.swing.JPanel();
         final com.undeadscythes.swinglow.HoverButton newGeneBase = new com.undeadscythes.swinglow.HoverButton();
+        right = new javax.swing.JPanel();
         final com.undeadscythes.swinglow.HoverButton loadGeneBase = new com.undeadscythes.swinglow.HoverButton();
-        final javax.swing.Box.Filler right = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        final javax.swing.JScrollPane scroll = new javax.swing.JScrollPane();
-        final javax.swing.JTextPane text = new javax.swing.JTextPane();
-        final javax.swing.JCheckBox hide = new javax.swing.JCheckBox();
 
-        lower.setLayout(new javax.swing.BoxLayout(lower, javax.swing.BoxLayout.LINE_AXIS));
-        lower.add(left);
+        title.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        title.setText("SuperGenes " + getClass().getPackage().getImplementationVersion());
 
-        buttons.setLayout(new java.awt.GridLayout(0, 1));
+        columns.setLayout(new java.awt.GridLayout(1, 2));
+
+        left.setLayout(new javax.swing.BoxLayout(left, javax.swing.BoxLayout.PAGE_AXIS));
 
         newGeneBase.setText("Start a New GeneBase");
         newGeneBase.setAlignmentX(0.5F);
@@ -55,56 +53,44 @@ public class Welcome extends javax.swing.JPanel {
                 newGeneBaseActionPerformed(evt);
             }
         });
-        buttons.add(newGeneBase);
+        left.add(newGeneBase);
 
-        loadGeneBase.setText("Load a GEDCOM");
+        columns.add(left);
+
+        right.setLayout(new javax.swing.BoxLayout(right, javax.swing.BoxLayout.PAGE_AXIS));
+
+        loadGeneBase.setText("Import a GEDCOM");
         loadGeneBase.setAlignmentX(0.5F);
         loadGeneBase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadGeneBaseActionPerformed(evt);
             }
         });
-        buttons.add(loadGeneBase);
+        right.add(loadGeneBase);
 
-        lower.add(buttons);
-        lower.add(right);
-
-        scroll.setBorder(null);
-
-        text.setEditable(false);
-        text.setOpaque(false);
-        scroll.setViewportView(text);
-        try {     text.setPage(getClass().getResource("/gui/welcome.html")); } catch (IOException ex) {}
-
-        hide.setText("Hide this screen on startup");
+        columns.add(right);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(hide)
-                .addGap(0, 461, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(scroll)
-                        .addComponent(lower, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
-                    .addContainerGap()))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(columns, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(title)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 388, Short.MAX_VALUE)
-                .addComponent(hide))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(68, 68, 68)
-                    .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(lower, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(68, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(title)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(columns, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -117,5 +103,9 @@ public class Welcome extends javax.swing.JPanel {
     }//GEN-LAST:event_newGeneBaseActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel columns;
+    private javax.swing.JPanel left;
+    private javax.swing.JPanel right;
+    private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,7 +6,6 @@ import com.undeadscythes.supergenes.SuperGenes;
 import com.undeadscythes.supergenes.SuperGenesHeader;
 import com.undeadscythes.supergenes.gui.listener.GeneBaseListener;
 import com.undeadscythes.supergenes.service.*;
-import com.undeadscythes.swinglow.CloseableTab;
 import com.undeadscythes.tipscript.TipRedirect;
 import java.awt.EventQueue;
 import java.util.Enumeration;
@@ -19,6 +18,7 @@ import javax.swing.*;
  */
 public class SuperGenesGUI extends JFrame {
     private static final long serialVersionUID = 1L;
+    private static final String LOOK_AND_FEEL = "Windows";
 
     private final SuperGenes program;
     private final TipRedirect out;
@@ -32,7 +32,7 @@ public class SuperGenesGUI extends JFrame {
     public SuperGenesGUI(final SuperGenes program, final TipRedirect out) {
         this.program = program;
         this.out = out;
-        setLookAndFeel("Windows");
+        setLookAndFeel();
         initComponents();
         for (final GeneBase geneBase : program.getGeneBases()) {
             addGeneBase(geneBase);
@@ -47,10 +47,10 @@ public class SuperGenesGUI extends JFrame {
         });
     }
 
-    private void setLookAndFeel(final String name) {
+    private void setLookAndFeel() {
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if (name.equals(info.getName())) {
+                if (LOOK_AND_FEEL.equals(info.getName())) {
                     UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -216,8 +216,7 @@ public class SuperGenesGUI extends JFrame {
     private void initComponents() {
 
         groupGeneBases = new javax.swing.ButtonGroup();
-        main = new com.undeadscythes.swinglow.CloseableTabPane();
-        final com.undeadscythes.supergenes.gui.Welcome welcome = new com.undeadscythes.supergenes.gui.Welcome(this);
+        content = new javax.swing.JPanel();
         footer = new com.undeadscythes.swinglow.DetailPane();
         javax.swing.JMenuBar menu = new javax.swing.JMenuBar();
         javax.swing.JMenu file = new javax.swing.JMenu();
@@ -237,15 +236,24 @@ public class SuperGenesGUI extends JFrame {
         geneBases = new javax.swing.JMenu();
         noGeneBases = new javax.swing.JMenuItem();
 
+        main.setFocusable(false);
+        main.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                mainComponentAdded(evt);
+            }
+            public void componentRemoved(java.awt.event.ContainerEvent evt) {
+                mainComponentRemoved(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SuperGenes");
         setMinimumSize(new java.awt.Dimension(640, 480));
 
-        main.setFocusable(false);
-        main.addTab("Welcome", welcome);
-        main.setTabComponentAt(main.indexOfComponent(welcome), new CloseableTab(main, "Welcome"));
+        content.setLayout(new java.awt.GridLayout(1, 1));
+        content.add(welcome);
 
-        getContentPane().add(main, java.awt.BorderLayout.CENTER);
+        getContentPane().add(content, java.awt.BorderLayout.CENTER);
         getContentPane().add(footer, java.awt.BorderLayout.PAGE_END);
 
         file.setText("File");
@@ -396,11 +404,27 @@ public class SuperGenesGUI extends JFrame {
         footer.setText(out.getOutput());
     }//GEN-LAST:event_runResToCen
 
+    private void mainComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_mainComponentAdded
+        if (main.getTabCount() > 0) {
+            content.removeAll();
+            content.add(main);
+        }
+    }//GEN-LAST:event_mainComponentAdded
+
+    private void mainComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_mainComponentRemoved
+        if (main.getTabCount() == 0) {
+            content.removeAll();
+            content.add(new Welcome(this));
+        }
+    }//GEN-LAST:event_mainComponentRemoved
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel content;
     public com.undeadscythes.swinglow.DetailPane footer;
     private javax.swing.JMenu geneBases;
     private javax.swing.ButtonGroup groupGeneBases;
-    private com.undeadscythes.swinglow.CloseableTabPane main;
+    private final com.undeadscythes.swinglow.CloseableTabPane main = new com.undeadscythes.swinglow.CloseableTabPane();
     private javax.swing.JMenuItem noGeneBases;
+    private final com.undeadscythes.supergenes.gui.Welcome welcome = new com.undeadscythes.supergenes.gui.Welcome(this);
     // End of variables declaration//GEN-END:variables
 }
